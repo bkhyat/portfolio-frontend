@@ -4,9 +4,11 @@ const BASE_URL = process.env.REACT_APP_STACKOVERFLOW_BASE_URL
 const DEFAULT_PARAM = {
     site: 'stackoverflow'
 }
+const TIME_OUT = 5000
 
 const getUserDetail = () => axios.get(BASE_URL,
     {
+        timeout: TIME_OUT,
         params: {
             ...DEFAULT_PARAM
         }
@@ -18,6 +20,7 @@ const getAnswer = () => axios.get()
 
 const getTopAnswers = () => axios.get(BASE_URL + '/answers',
     {
+        timeout: TIME_OUT,
         params: {
             ...DEFAULT_PARAM,
             max: 10,
@@ -28,6 +31,7 @@ const getTopAnswers = () => axios.get(BASE_URL + '/answers',
 
 const getTopQuestions = () => axios.get(BASE_URL + '/questions',
     {
+        timeout: TIME_OUT,
         params: {
             ...DEFAULT_PARAM,
             max: 5,
@@ -38,6 +42,7 @@ const getTopQuestions = () => axios.get(BASE_URL + '/questions',
 
 const getTopTags = () => axios.get(BASE_URL + '/top-tags',
     {
+        timeout: TIME_OUT,
         params: {
             ...DEFAULT_PARAM,
             page: 1,
@@ -47,6 +52,7 @@ const getTopTags = () => axios.get(BASE_URL + '/top-tags',
 
 const getTopAnswersByTag = (tag) => axios.get(BASE_URL + '/tags/' + tag + '/top-answers',
     {
+        timeout: TIME_OUT,
         params: {
             ...DEFAULT_PARAM,
             order: 'desc',

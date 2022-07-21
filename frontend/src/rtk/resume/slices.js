@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import resumeService from "./services";
+import {message} from "antd";
 
 
 export const fetchResume = createAsyncThunk(
@@ -10,12 +11,13 @@ export const fetchResume = createAsyncThunk(
             const resp = await resumeService.fetchResume()
             return resp.data
         } catch {
+            message.error('Server error occurred, Please come back letter', 3)
             return thunkAPI.rejectWithValue("Error fetching profiles. Try again later!")
         }
     }
 )
 const initalResume = {
-    isResumeLoading: true,
+    isResumeLoading: false,
     profiles: [],
     contacts: [],
     experiences: [],

@@ -11,7 +11,7 @@ const Credits = () => {
     useEffect(() => {
         setLoading(true)
         if (!fetched) {
-            axios.get(process.env.REACT_APP_API_BASE_URL + '/requirements/')
+            axios.get(process.env.REACT_APP_API_BASE_URL + '/requirements/', {timeout: 5000})
                 .then(resp => {
                     setPythonLibraries(resp.data)
                     setLoading(false)

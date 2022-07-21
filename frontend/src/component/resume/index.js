@@ -32,7 +32,7 @@ const Resume = () => {
     </>
 
     return (
-        <Spin spinning={isResumeLoading}>
+        <Spin spinning={isResumeLoading} tip={'Hold on! Fetching Resume'}>
             <Card>
                 <Card.Grid style={{width: '70%'}} hoverable={false}>
                     <Card title={mainTitle} extra={mainTitleExtra}/>

@@ -23,7 +23,7 @@ export const fetchNavItems = createAsyncThunk(
 
 const initialState = {
     navItems: [],
-    currentNavItem: undefined,
+    currentNavItem: "resume",
     isLoading: false
 }
 
@@ -32,7 +32,7 @@ export const navSlice = createSlice({
     initialState,
     reducers: {
         navItemChanged: (state, action) => {
-            state.currentNavItem = action.payload.data
+            state.currentNavItem = action.payload
         }
     },
     extraReducers: {
@@ -51,5 +51,5 @@ export const navSlice = createSlice({
     }
 })
 
-export const { navItemChanged } = navSlice.actions
+export const {navItemChanged} = navSlice.actions
 export default navSlice.reducer

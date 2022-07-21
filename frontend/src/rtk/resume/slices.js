@@ -11,7 +11,7 @@ export const fetchResume = createAsyncThunk(
             const resp = await resumeService.fetchResume()
             return resp.data
         } catch {
-            message.error('Server error occurred, Please come back letter', 3)
+            message.error('Server error occurred, Please come back later', 3)
             return thunkAPI.rejectWithValue("Error fetching profiles. Try again later!")
         }
     }

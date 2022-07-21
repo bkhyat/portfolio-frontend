@@ -3,10 +3,10 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + "/resume/v1"
 
 
-const fetchProfiles = () => axios.get(BASE_URL + "/profiles")
+const fetchResume = () => axios.get(BASE_URL + "/users/" + process.env.REACT_APP_API_USER_ID + '/')
 
 const resumeService = {
-    fetchProfiles
+    fetchResume
 }
 
 export default resumeService;

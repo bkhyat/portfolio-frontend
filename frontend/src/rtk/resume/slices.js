@@ -2,12 +2,12 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import resumeService from "./services";
 
 
-export const fetchProfiles = createAsyncThunk(
-    "resume/profiles",
+export const fetchResume = createAsyncThunk(
+    "resume/fetchResume",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(toggleProfileLoading())
+        thunkAPI.dispatch(toggleResumeLoading())
         try {
-            const resp = await resumeService.fetchProfiles()
+            const resp = await resumeService.fetchResume()
             return resp.data
         } catch {
             return thunkAPI.rejectWithValue("Error fetching profiles. Try again later!")
@@ -15,30 +15,55 @@ export const fetchProfiles = createAsyncThunk(
     }
 )
 const initalResume = {
-    profiles: {isLoading: false, profiles: []},
+    isResumeLoading: true,
+    profiles: [],
+    contacts: [],
     experiences: [],
     education: [],
-    skills: []
+    skills: {soft_skills: [], tech_skills: {}},
+    interests: []
 }
 const resumeSlice = createSlice({
     name: "resume",
     initialState: initalResume,
     reducers: {
-        toggleProfileLoading: (state, action) => {
-            state.isLoading = !state.isLoading
+        toggleResumeLoading: (state, action) => {
+            state.isResumeLoading = !state.isResumeLoading
         }
     },
     extraReducers: {
-        [fetchProfiles.fulfilled]: (state, action) => {
-            state.profiles.profiles = action.payload
-            state.profiles.isLoading = false
+        [fetchResume.fulfilled]: (state, action) => {
+            const {contacts, ...rest} = {...action.payload}
+            const revisedContacts = {}
+            contacts.forEach(contact => {
+                switch (contact.contact_type.toLowerCase()) {
+                    case 'mobile':
+                        revisedContacts['Mobile'] = contact.contact_info
+                        break;
+                    case 'email':
+                        revisedContacts['Email'] = contact.contact_info
+                        break;
+                    case 'linkedin':
+                        revisedContacts['LinkedIn'] = contact.contact_info
+                        break;
+                    case 'github':
+                        revisedContacts['GitHub'] = contact.contact_info
+                        break;
+                    case 'stackoverflow':
+                        revisedContacts['StackOverflow'] = contact.contact_info
+                        break;
+                    default:
+                        revisedContacts[contact.contact_type] = contact.contact_info
+                }
+            })
+            return {...rest, contacts: {...revisedContacts}, isResumeLoading: false}
         },
-        [fetchProfiles.rejected]: (state, action) => {
-            state.profiles.isLoading = false
+        [fetchResume.rejected]: (state) => {
+            state.isResumeLoading = false
         }
     }
 })
 
-const {toggleProfileLoading} = resumeSlice.actions
+const {toggleResumeLoading} = resumeSlice.actions
 
 export default resumeSlice.reducer

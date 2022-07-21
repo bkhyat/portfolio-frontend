@@ -1,20 +1,21 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchUserDetail} from "../../rtk/stackoverflow/slices";
+import {Spin} from "antd";
 
 
 const StackoverflowProfile = () => {
-    const {badge_counts, ...rest} = useSelector(state => state.stackoverflow.userDetail)
+    const {badge_counts, isLoading, ...rest} = useSelector(state => state.stackoverflow.userDetail)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchUserDetail())
     }, [])
 
-    return <div>
+    return <Spin spinning={isLoading}>
         <img src={rest.profile_image} alt={"avatar"} height={60} width={60}/>
         {Object.keys(rest).map(key => <div key={key}>{key}:{rest[key]}</div>)}
-    </div>
+    </Spin>
 }
 
 export default StackoverflowProfile;

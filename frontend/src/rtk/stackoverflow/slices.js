@@ -17,6 +17,7 @@ export const fetchUserDetail = createAsyncThunk(
 
 const initialState = {
     userDetail: {
+        isLoading: true
         // bronze: -1,
         // silver: -1,
         // gold: -1,
@@ -38,7 +39,8 @@ const stackoverflowSlice = createSlice(
             [fetchUserDetail.fulfilled]: (state, action) => {
                 // const {badge_counts, ...rest} = action.payload.items[0]
                 state.userDetail = {
-                    ...action.payload.items[0]
+                    ...action.payload.items[0],
+                    isLoading: false
                     // ...badge_counts,
                     // lastAccessed: rest.last_access_date,
                     // reputation: rest.reputation,
@@ -50,7 +52,7 @@ const stackoverflowSlice = createSlice(
                 }
             },
             [fetchUserDetail.rejected]: (state, action) => {
-
+                state.userDetail.isLoading = false
             }
         }
     }

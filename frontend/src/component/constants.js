@@ -1,33 +1,10 @@
-import {CalendarOutlined, ControlOutlined, GithubOutlined, ProfileOutlined, VerifiedOutlined} from "@ant-design/icons";
+import {CopyrightCircleOutlined, GithubOutlined, ProfileOutlined} from "@ant-design/icons";
 
 export const NAV_ITEMS = [
     {
         label: "RESUME",
         key: "resume",
         icon: <ProfileOutlined/>,
-        type: 'group',
-        children: [
-            {
-                label: 'Profile',
-                key: 'profile',
-                icon: <CalendarOutlined/>
-            },
-            {
-                label: 'Experience',
-                key: 'experience',
-                icon: <CalendarOutlined/>
-            },
-            {
-                label: 'Education',
-                key: 'education',
-                icon: <VerifiedOutlined/>
-            },
-            {
-                label: 'Skills',
-                key: 'skills',
-                icon: <ControlOutlined/>
-            }
-        ]
     },
     {
         label: "DEMO",
@@ -65,5 +42,10 @@ export const NAV_ITEMS = [
     {
         label: 'STACKOVERFLOW',
         key: 'stackoverflow'
+    },
+    {
+        label: "Credits",
+        key: 'credits',
+        icon: <CopyrightCircleOutlined/>
     }
 ]

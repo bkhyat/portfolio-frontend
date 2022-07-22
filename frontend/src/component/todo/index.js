@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Card, Checkbox, List, message, Space, Typography} from "antd";
+import {Card, Checkbox, List, message, Space, Spin, Typography} from "antd";
 import {EditOutlined} from "@ant-design/icons";
 import TodoModal from "./TodoModal";
 
@@ -23,9 +23,11 @@ const Todo = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [todos, setTodos] = useState([])
     const [currentTodo, setCurrentTodo] = useState([])
+    const [fetching, setFetching] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible)
 
     useEffect(() => {
+        setFetching(true)
         axios.get(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/', {timeout: 3000})
             .then(resp => {
                 setTodos(resp.data)
@@ -33,6 +35,7 @@ const Todo = () => {
             .catch(err => {
                 message.error("Error fetching todos", 3)
             })
+            .finally(() => setFetching(false))
     }, [])
 
     useEffect(() => {
@@ -44,17 +47,18 @@ const Todo = () => {
     const onEditTodo = (id) => setCurrentTodo(todos.filter(item => item.id === id))
 
     return (
-        <Card title={'ToDo List'} style={{height: '100%'}}>
-            <Typography.Link onClick={() => {
-                setCurrentTodo([])
-                toggleVisibility()
-            }}>Create new Todo</Typography.Link>
-            <List
-                bordered
-                style={{width: '100%'}}
-                size={'small'}
-                itemLayout={'vertical'}
-                pagination={false}
+        <Spin spinning={fetching}>
+            <Card title={'ToDo List'} style={{height: '100%'}}>
+                <Typography.Link onClick={() => {
+                    setCurrentTodo([])
+                    toggleVisibility()
+                }}>Create new Todo</Typography.Link>
+                <List
+                    bordered
+                    style={{width: '100%'}}
+                    size={'small'}
+                    itemLayout={'vertical'}
+                    pagination={false}
                 data={todos}
                 dataSource={todos}
                 renderItem={(item) => (
@@ -73,13 +77,14 @@ const Todo = () => {
                         {item.description}
                     </List.Item>
                 )}
-            />
-            {currentTodo && isVisible && <TodoModal
-                isVisible={isVisible}
-                toggleVisible={toggleVisibility}
-                todo={currentTodo}
-            />}
-        </Card>
+                />
+                {currentTodo && isVisible && <TodoModal
+                    isVisible={isVisible}
+                    toggleVisible={toggleVisibility}
+                    todo={currentTodo}
+                />}
+            </Card>
+        </Spin>
     )
 
 }

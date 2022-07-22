@@ -9,8 +9,9 @@ import Resume from "./component/resume";
 const {Sider, Content} = Layout
 const App = () => {
     const {currentNavItem} = useSelector(state => state.nav)
+
     return (
-        <Layout className="site-layout" style={{height: '100vh'}}>
+        <Layout className="site-layout" style={{minWidth: '1250px'}}>
             <Sider collapsible={true}>
                 <Sidebar/>
             </Sider>

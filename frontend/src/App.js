@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import StackoverflowProfile from "./component/stackoverflow/stackoverflowProfile";
 import Credits from "./component/credits";
 import Resume from "./component/resume";
+import Todo from "./component/todo";
 
 const {Sider, Content} = Layout
 const App = () => {
@@ -17,8 +18,9 @@ const App = () => {
             </Sider>
             <Content style={{margin: '0 16px'}}>
                 {currentNavItem === 'resume' ? <Resume/> :
-                    currentNavItem === 'stackoverflow' ? <StackoverflowProfile/> :
-                        currentNavItem === 'credits' ? <Credits/> : ''
+                    currentNavItem === 'to-do' ? <Todo/> :
+                        currentNavItem === 'stackoverflow' ? <StackoverflowProfile/> :
+                            currentNavItem === 'credits' ? <Credits/> : ''
                 }
             </Content>
         </Layout>

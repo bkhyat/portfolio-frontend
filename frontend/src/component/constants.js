@@ -1,4 +1,4 @@
-import {CopyrightCircleOutlined, GithubOutlined, ProfileOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CopyrightCircleOutlined, GithubOutlined, ProfileOutlined} from "@ant-design/icons";
 
 export const NAV_ITEMS = [
     {
@@ -15,8 +15,7 @@ export const NAV_ITEMS = [
             {
                 label: 'To Do',
                 key: 'to-do',
-                disabled: true,
-                // icon: <CalendarOutlined/>
+                icon: <CalendarOutlined/>
             },
             {
                 label: 'Simple Quiz',

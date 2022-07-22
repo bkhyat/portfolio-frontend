@@ -57,7 +57,10 @@ const Experience = ({experience}) => {
 
             </Card.Grid>
             <Card.Grid style={{width: '30%'}} hoverable={false}>
-                <Space wrap>{experience.skills.map(item => <Tag>{item}</Tag>)}</Space>
+                <Space direction={'vertical'}>
+                    <Typography.Text strong>Relevant Skills:</Typography.Text>
+                    <Space wrap>{experience.skills.map(item => <Tag>{item}</Tag>)}</Space>
+                </Space>
             </Card.Grid>
         </>
     )

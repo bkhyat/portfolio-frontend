@@ -1,4 +1,4 @@
-import './App.css';
+import './App.less';
 import Sidebar from "./component/Sidebar";
 import {Layout} from "antd";
 import {useSelector} from "react-redux";
@@ -11,7 +11,7 @@ const App = () => {
     const {currentNavItem} = useSelector(state => state.nav)
 
     return (
-        <Layout className="site-layout" style={{minWidth: '1250px'}}>
+        <Layout className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
             <Sider collapsible={true}>
                 <Sidebar/>
             </Sider>

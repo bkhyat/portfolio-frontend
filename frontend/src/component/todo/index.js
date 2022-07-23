@@ -1,27 +1,13 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Card, Checkbox, List, message, Space, Spin, Typography} from "antd";
-import {EditOutlined} from "@ant-design/icons";
+import {Card, Col, Divider, message, Row, Spin, Typography} from "antd";
 import TodoModal from "./TodoModal";
+import TodoItem from "./TodoItem";
 
 
-const CompleteToggle = ({is_complete}) => {
-
-    return <Space>
-        <Typography.Link>
-            <Checkbox defaultChecked={is_complete}/> {is_complete ? 'Mark Incomplete' : 'Mark Complete'}
-        </Typography.Link>
-    </Space>
-}
-
-const EditOption = ({id, onEditClick}) => {
-    return <Space>
-        <Typography.Link onClick={() => onEditClick(id)}><EditOutlined/> Edit</Typography.Link>
-    </Space>
-}
 const Todo = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState({})
     const [currentTodo, setCurrentTodo] = useState([])
     const [fetching, setFetching] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible)
@@ -30,7 +16,16 @@ const Todo = () => {
         setFetching(true)
         axios.get(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/', {timeout: 3000})
             .then(resp => {
-                setTodos(resp.data)
+                const complete = []
+                const pending = []
+                resp.data.forEach(todo => {
+                    if (todo.is_completed) {
+                        complete.push(todo)
+                    } else {
+                        pending.push(todo)
+                    }
+                    setTodos({complete, pending})
+                })
             })
             .catch(err => {
                 message.error("Error fetching todos", 3)
@@ -48,45 +43,31 @@ const Todo = () => {
 
     return (
         <Spin spinning={fetching}>
-            <Card title={'ToDo List'} style={{height: '100%'}}>
-                <Typography.Link onClick={() => {
-                    setCurrentTodo([])
-                    toggleVisibility()
-                }}>Create new Todo</Typography.Link>
-                <List
-                    bordered
-                    style={{width: '100%'}}
-                    size={'small'}
-                    itemLayout={'vertical'}
-                    pagination={false}
-                data={todos}
-                dataSource={todos}
-                renderItem={(item) => (
-                    <List.Item
-                        key={item.id}
-                        actions={[
-                            <CompleteToggle is_complete={item.is_completed}/>,
-                            <EditOption id={item.id} onEditClick={onEditTodo}/>
-                        ]}
-                    >
-                        <List.Item.Meta
-                            title={item.title}
-                            description={`Created at: ${new Date(item.created_at).toLocaleString()} 
-                    Last modified: ${new Date(item.updated_at).toLocaleString()}`}
-                        />
-                        {item.description}
-                    </List.Item>
-                )}
-                />
-                {currentTodo && isVisible && <TodoModal
-                    isVisible={isVisible}
-                    toggleVisible={toggleVisibility}
-                    todo={currentTodo}
-                />}
+            <Card>
+                <Divider>Todo List</Divider>
+                <Row gutter={12} style={{height: '100vh'}}>
+                    <Col span={12}>
+                        <Card title={"Pending Todos"} extra={<Typography.Link onClick={() => {
+                            setCurrentTodo([])
+                            toggleVisibility()
+                        }}>Add More Todo...</Typography.Link>}>
+                            {todos.pending?.map(todo => <TodoItem todo={todo} onEditTodo={onEditTodo}/>)}
+                        </Card>
+                    </Col>
+                    <Col span={12}>
+                        <Card title={"Completed Todos"}>
+                            {todos.complete?.map(todo => <TodoItem todo={todo} onEditTodo={onEditTodo}/>)}
+                        </Card>
+                    </Col>
+                </Row>
             </Card>
+            {currentTodo && isVisible && <TodoModal
+                isVisible={isVisible}
+                toggleVisible={toggleVisibility}
+                todo={currentTodo}
+            />}
         </Spin>
     )
 
 }
-
 export default Todo;

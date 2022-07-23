@@ -18,6 +18,7 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
                     resp => {
                         console.log(resp.data)
                         message.success('Todo updated successfully', 3)
+                        toggleVisible();
                     }
                 )
                 .catch(error => {
@@ -29,6 +30,7 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
                 .then(resp => {
                     console.log(resp.data)
                     message.success('New todo created successfully!', 3)
+                    toggleVisible();
                 })
                 .catch(
                     err => {

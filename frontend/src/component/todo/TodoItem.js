@@ -17,8 +17,23 @@ const EditOption = ({id, onEditClick}) => {
 }
 
 const TodoItem = ({todo, onEditTodo}) => {
+    const getRibbonProps = () => {
+        const props = {}
+        if (todo.is_completed) {
+            props['text'] = `Completed at: ${new Date(todo.completed_at || todo.updated_at).toLocaleString()}`
+        } else {
+            if (todo.created_at === todo.updated_at) {
+                props['text'] = `Created at: ${new Date(todo.created_at).toLocaleString()}`
+                props['color'] = 'blue'
+            } else {
+                props['text'] = `Last Modified: ${new Date(todo.updated_at).toLocaleString()}`
+                props['color'] = 'purple'
+            }
+        }
+        return props
+    }
     return (
-        <Badge.Ribbon>
+        <Badge.Ribbon {...getRibbonProps()}>
             <Card title={todo.title}>
                 <Space direction={'vertical'}>
                     {todo.description}

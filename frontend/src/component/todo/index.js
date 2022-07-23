@@ -39,23 +39,25 @@ const Todo = () => {
         }
     }, [currentTodo])
 
-    const onEditTodo = (id) => setCurrentTodo(todos.filter(item => item.id === id))
+    const onEditTodo = (id) => setCurrentTodo([...(todos.complete || []), ...(todos.pending || [])].filter(item => item.id === id))
 
     return (
         <Spin spinning={fetching}>
             <Card>
                 <Divider>Todo List</Divider>
-                <Row gutter={12} style={{height: '100vh'}}>
+                <Row gutter={24}>
                     <Col span={12}>
-                        <Card title={"Pending Todos"} extra={<Typography.Link onClick={() => {
-                            setCurrentTodo([])
-                            toggleVisibility()
-                        }}>Add More Todo...</Typography.Link>}>
+                        <Card title={"Pending Todos"}
+                              bodyStyle={{overflowY: 'auto', height: '750px'}}
+                              extra={<Typography.Link onClick={() => {
+                                  setCurrentTodo([])
+                                  toggleVisibility()
+                              }}>Add More Todo...</Typography.Link>}>
                             {todos.pending?.map(todo => <TodoItem todo={todo} onEditTodo={onEditTodo}/>)}
                         </Card>
                     </Col>
                     <Col span={12}>
-                        <Card title={"Completed Todos"}>
+                        <Card title={"Completed Todos"} bodyStyle={{overflowY: 'scroll', height: '750px'}}>
                             {todos.complete?.map(todo => <TodoItem todo={todo} onEditTodo={onEditTodo}/>)}
                         </Card>
                     </Col>

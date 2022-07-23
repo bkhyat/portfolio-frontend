@@ -41,8 +41,9 @@ const ToDoForm = ({onFinish, form, todo = []}) => {
                                 <Form.Item
                                     name={[name, 'is_completed']}
                                     wrapperCol={{offset: 4}}
+                                    valuePropName="checked"
                                 >
-                                    <Checkbox defaultChecked={false}/> Completed?
+                                    <Checkbox>Completed?</Checkbox>
                                 </Form.Item>
                                 {fields.length > 1 && <Button
                                     danger

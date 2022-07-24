@@ -1,5 +1,5 @@
-import {Badge, Card, Checkbox, message, Space, Typography} from "antd";
-import {EditOutlined, LoadingOutlined} from "@ant-design/icons";
+import {Badge, Card, Checkbox, Divider, message, Space} from "antd";
+import {DeleteOutlined, EditOutlined, LoadingOutlined} from "@ant-design/icons";
 import axios from "axios";
 import {useState} from "react";
 
@@ -14,25 +14,39 @@ const CompleteToggle = ({is_complete, id}) => {
             })
             .catch(err => {
                 console.log(err)
-                message.error("An error occurred! Try again later.")
+                message.error("An error occurred! Try again later.", 3)
             })
             .finally(() => {
                 setLoading(false)
             })
     }
 
-    return <Space>
-        <Typography.Link onClick={toggleComplete}>
-            {loading ? <LoadingOutlined/> : <Checkbox defaultChecked={isComplete} onChange={toggleComplete}
-                                                      loading={true}/>}{is_complete ? 'Mark Incomplete' : 'Mark Complete'}
-        </Typography.Link>
-    </Space>
+    return <>
+        {loading ? <LoadingOutlined/> : <Checkbox defaultChecked={isComplete} onChange={toggleComplete}
+                                                  loading={true}>
+            {is_complete ? 'Mark Incomplete' : 'Mark Complete'}
+        </Checkbox>
+        }
+    </>
 }
 
 const EditOption = ({id, onEditClick}) => {
-    return <Space>
-        <Typography.Link onClick={() => onEditClick(id)}><EditOutlined/> Edit</Typography.Link>
-    </Space>
+    return <span onClick={() => onEditClick(id)} style={{cursor: 'pointer'}}><EditOutlined/> Edit</span>
+}
+
+const DeleteOption = ({id}) => {
+    const onDelete = (id) => {
+        axios.delete(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/' + id)
+            .then(resp => {
+                console.log(resp.data)
+                message.success("Todo Deleted Successfully!", 3)
+            })
+            .catch(error => {
+                console.log(error)
+                message.error("Could not delete at the moment! Try again later", 3)
+            })
+    }
+    return <span onClick={() => onDelete(id)} style={{color: 'red', cursor: 'pointer'}}><DeleteOutlined/> Delete</span>
 }
 
 const TodoItem = ({todo, onEditTodo}) => {
@@ -56,9 +70,10 @@ const TodoItem = ({todo, onEditTodo}) => {
             <Card title={todo.title}>
                 <Space direction={'vertical'}>
                     {todo.description}
-                    <Space>
+                    <Space split={<Divider type="vertical"/>}>
                         <EditOption onEditClick={onEditTodo} id={todo.id}/>
                         <CompleteToggle is_complete={todo.is_completed} id={todo.id}/>
+                        <DeleteOption id={todo.id}/>
                     </Space>
                 </Space>
             </Card>

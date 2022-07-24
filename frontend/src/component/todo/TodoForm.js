@@ -1,4 +1,4 @@
-import {Button, Checkbox, Form, Input} from "antd";
+import {Button, Checkbox, Form, Input, Typography} from "antd";
 import {MinusOutlined, PlusOutlined} from "@ant-design/icons";
 
 const ToDoForm = ({onFinish, form, todo = []}) => {
@@ -44,14 +44,14 @@ const ToDoForm = ({onFinish, form, todo = []}) => {
                                     valuePropName="checked"
                                 >
                                     <Checkbox>Completed?</Checkbox>
+                                    {fields.length > 1 && <Typography.Text
+                                        style={{color: 'red', float: 'right', cursor: 'pointer'}}
+                                        danger
+                                        onClick={() => operation.remove(name)}
+                                    >
+                                        <MinusOutlined/> Remove
+                                    </Typography.Text>}
                                 </Form.Item>
-                                {fields.length > 1 && <Button
-                                    danger
-                                    onClick={() => operation.remove(name)} style={{width: '100%'}}
-                                    icon={<MinusOutlined/>}
-                                >
-                                    Remove
-                                </Button>}
                             </>
                         ))}
 

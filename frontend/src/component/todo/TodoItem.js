@@ -1,11 +1,30 @@
-import {Badge, Card, Checkbox, Space, Typography} from "antd";
-import {EditOutlined} from "@ant-design/icons";
+import {Badge, Card, Checkbox, message, Space, Typography} from "antd";
+import {EditOutlined, LoadingOutlined} from "@ant-design/icons";
+import axios from "axios";
+import {useState} from "react";
 
-const CompleteToggle = ({is_complete}) => {
+const CompleteToggle = ({is_complete, id}) => {
+    const [isComplete, setIsComplete] = useState(is_complete)
+    const [loading, setLoading] = useState(false)
+    const toggleComplete = () => {
+        setLoading(true)
+        axios.patch(`${process.env.REACT_APP_API_BASE_URL}/todo/v1/todos/${id}/`, {is_completed: !is_complete})
+            .then(resp => {
+                setIsComplete(resp.data.is_completed)
+            })
+            .catch(err => {
+                console.log(err)
+                message.error("An error occurred! Try again later.")
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
 
     return <Space>
-        <Typography.Link>
-            <Checkbox defaultChecked={is_complete}/> {is_complete ? 'Mark Incomplete' : 'Mark Complete'}
+        <Typography.Link onClick={toggleComplete}>
+            {loading ? <LoadingOutlined/> : <Checkbox defaultChecked={isComplete} onChange={toggleComplete}
+                                                      loading={true}/>}{is_complete ? 'Mark Incomplete' : 'Mark Complete'}
         </Typography.Link>
     </Space>
 }
@@ -39,7 +58,7 @@ const TodoItem = ({todo, onEditTodo}) => {
                     {todo.description}
                     <Space>
                         <EditOption onEditClick={onEditTodo} id={todo.id}/>
-                        <CompleteToggle is_complete={todo.is_completed}/>
+                        <CompleteToggle is_complete={todo.is_completed} id={todo.id}/>
                     </Space>
                 </Space>
             </Card>

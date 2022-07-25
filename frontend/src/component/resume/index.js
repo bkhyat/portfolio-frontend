@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchResume} from "../../rtk/resume/slices";
-import {Card, Divider, Spin, Typography} from "antd";
+import {Card, Divider, Space, Spin, Typography} from "antd";
 import Profile from "./Profile";
 import Skills from "./skills";
 import ExperienceList from "./ExperienceList";
 import Education from "./Education";
+import {GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
 
 const Resume = () => {
@@ -26,10 +27,28 @@ const Resume = () => {
         </Typography.Paragraph>
     </>
 
+    const getIcon = (icon, value) => {
+        switch (icon) {
+            case "Mobile":
+                return <Space>{value} <PhoneOutlined/></Space>
+            case "Email":
+                return <Space>{value} <MailOutlined/></Space>
+            case "LinkedIn":
+                return <Space><a href={value} target={'_blank'} rel="noreferrer">{value}</a><LinkedinOutlined/></Space>
+            case "GitHub":
+                return <Space><a href={value} target={'_blank'} rel="noreferrer">{value}</a><GithubOutlined/></Space>
+            case "StackOverflow":
+                return <a href={value} target={'_blank'} rel="noreferrer">{value}</a>
+            default:
+                return value
+        }
+    }
     const mainTitleExtra = <>
-        <Typography.Paragraph style={{textAlign: 'right'}}>
-            {(Object.keys(resume.contacts || {})).map(key => <>{resume.contacts[key]}<br/></>)}
-        </Typography.Paragraph>
+        {/*<Typography.Paragraph style={{textAlign: 'right'}}>*/}
+        <Space direction={'vertical'} style={{textAlign: 'right'}}>
+            {(Object.keys(resume.contacts || {})).map(key => <>{getIcon(key, resume.contacts[key])}</>)}
+        </Space>
+        {/*</Typography.Paragraph>*/}
     </>
 
     return (

@@ -12,11 +12,11 @@ const App = () => {
     const {currentNavItem} = useSelector(state => state.nav)
 
     return (
-        <Layout className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
+        <Layout className="site-layout" style={{minWidth: '1250px', height: '100vh'}}>
             <Sider collapsible={true}>
                 <Sidebar/>
             </Sider>
-            <Content style={{margin: '0 16px'}}>
+            <Content style={{margin: '0 16px', overflowY: 'auto'}}>
                 {currentNavItem === 'resume' ? <Resume/> :
                     currentNavItem === 'to-do' ? <Todo/> :
                         currentNavItem === 'stackoverflow' ? <StackoverflowProfile/> :

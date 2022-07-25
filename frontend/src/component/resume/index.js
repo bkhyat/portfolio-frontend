@@ -5,6 +5,7 @@ import {Card, Divider, Spin, Typography} from "antd";
 import Profile from "./Profile";
 import Skills from "./skills";
 import ExperienceList from "./ExperienceList";
+import Education from "./Education";
 
 
 const Resume = () => {
@@ -43,6 +44,7 @@ const Resume = () => {
                 </Card.Grid>
                 <Card.Grid style={{width: '30%'}} hoverable={false}>
                     <Skills skills={resume.skills}/>
+                    <Education educations={resume.educations}/>
                 </Card.Grid>
             </Card>
         </Spin>

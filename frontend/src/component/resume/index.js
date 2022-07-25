@@ -44,6 +44,7 @@ const Resume = () => {
                 </Card.Grid>
                 <Card.Grid style={{width: '30%'}} hoverable={false}>
                     <Skills skills={resume.skills}/>
+                    <Divider plain style={{fontWeight: 'bold'}}>Education</Divider>
                     <Education educations={resume.educations}/>
                 </Card.Grid>
             </Card>

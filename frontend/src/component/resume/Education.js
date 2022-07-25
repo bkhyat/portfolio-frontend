@@ -1,4 +1,4 @@
-import {Card, Divider, Typography} from "antd";
+import {Card, Typography} from "antd";
 
 const EducationItem = ({education}) => {
     const titleLeft = <>
@@ -31,10 +31,7 @@ const EducationItem = ({education}) => {
 const Education = ({educations}) => {
 
     return <>
-        <Divider>
-            Education
-        </Divider>
-        {educations.map(education => <EducationItem education={education}/>)}
+        {(educations || []).map(education => <EducationItem education={education}/>)}
     </>
 
 }

@@ -5,6 +5,7 @@ import {
     BarsOutlined,
     CommentOutlined,
     EditOutlined,
+    ExportOutlined,
     EyeOutlined,
     FormOutlined,
     TagsOutlined
@@ -46,6 +47,9 @@ const Answer = ({answer}) => {
                 text={new Date(answer.last_edit_date * 1000).toLocaleString()}
                 title={'Last Edited At'}
             />
+            <a href={`https://stackoverflow.com/a/${answer.answer_id}`} target={'_blank'} rel="noreferrer">
+                <IconText icon={ExportOutlined} text={' '} title={'Open in Stackoverflow'}/>
+            </a>
         </Space>
         <MarkdownComponent text={answer?.body_markdown}/>
     </>
@@ -93,6 +97,9 @@ export const QuestionModal = () => {
                         text={new Date(question.creation_date * 1000).toLocaleString()}
                         title={'Asked At'}
                     />
+                    <a href={`https://stackoverflow.com/q/${question.question_id}`} target={'_blank'} rel="noreferrer">
+                        <IconText icon={ExportOutlined} text={' '} title={'Open in Stackoverflow'}/>
+                    </a>
                 </Space>
             </Space>}
         onClose={toggleVisibility}>

@@ -1,5 +1,5 @@
 import {createElement, useEffect} from "react";
-import {Divider, Drawer, List, Skeleton, Space, Tag, Typography} from "antd";
+import {Divider, Drawer, List, Skeleton, Space, Tag, Tooltip, Typography} from "antd";
 import {
     ArrowUpOutlined,
     BarsOutlined,
@@ -14,11 +14,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {changeSelectedQuestion, toggleQuestionModalVisible} from "../../rtk/stackoverflow/slices";
 
 
-const IconText = ({icon, text}) => (
-    <Space>
-        {createElement(icon)}
-        {text || 0}
-    </Space>
+const IconText = ({icon, text, title = ''}) => (
+    <Tooltip title={title} placement={'bottom'}>
+        <Space>
+            {createElement(icon)}
+            {text || 0}
+        </Space>
+    </Tooltip>
 )
 
 
@@ -29,9 +31,21 @@ const Answer = ({answer}) => {
         <Typography.Text strong>Answer:</Typography.Text>
         < hr/>
         <Space split={<Divider type={'vertical'}/>}>
-            <IconText icon={ArrowUpOutlined} text={answer.score}/>
-            <IconText icon={FormOutlined} text={new Date(answer.creation_date * 1000).toLocaleString()}/>
-            <IconText icon={EditOutlined} text={new Date(answer.last_edit_date * 1000).toLocaleString()}/>
+            <IconText
+                icon={ArrowUpOutlined}
+                text={answer.score}
+                title={'Upvote Count'}
+            />
+            <IconText
+                icon={FormOutlined}
+                text={new Date(answer.creation_date * 1000).toLocaleString()}
+                title={'Answered At'}
+            />
+            <IconText
+                icon={EditOutlined} t
+                text={new Date(answer.last_edit_date * 1000).toLocaleString()}
+                title={'Last Edited At'}
+            />
         </Space>
         <MarkdownComponent text={answer?.body_markdown}/>
     </>
@@ -54,11 +68,31 @@ export const QuestionModal = () => {
                 <Typography.Text strong>Q. {question.title}</Typography.Text>
                 <Space><TagsOutlined style={{color: 'gray'}}/> {question?.tags?.map(item => <Tag>{item}</Tag>)} </Space>
                 <Space split={<Divider type="vertical"/>}>
-                    <IconText icon={ArrowUpOutlined} text={question.up_vote_count}/>
-                    <IconText icon={EyeOutlined} text={question.view_count}/>
-                    <IconText icon={BarsOutlined} text={question.answer_count}/>
-                    <IconText icon={CommentOutlined} text={question.comment_count}/>
-                    <IconText icon={FormOutlined} text={new Date(question.creation_date * 1000).toLocaleString()}/>
+                    <IconText
+                        icon={ArrowUpOutlined}
+                        text={question.up_vote_count}
+                        title={'Upvote Count'}
+                    />
+                    <IconText
+                        icon={EyeOutlined}
+                        text={question.view_count}
+                        title={'View Count'}
+                    />
+                    <IconText
+                        icon={BarsOutlined}
+                        text={question.answer_count}
+                        title={'Answer Count'}
+                    />
+                    <IconText
+                        icon={CommentOutlined}
+                        text={question.comment_count}
+                        title={'Comment Count'}
+                    />
+                    <IconText
+                        icon={FormOutlined}
+                        text={new Date(question.creation_date * 1000).toLocaleString()}
+                        title={'Asked At'}
+                    />
                 </Space>
             </Space>}
         onClose={toggleVisibility}>
@@ -103,15 +137,34 @@ export const Questions = ({questions, answers, isLoading}) => {
                     extra={<Typography.Link onClick={() => onSelectedQuestionChange(item)}
                                             style={{cursor: 'pointer'}}>View</Typography.Link>}
                     actions={[
-                        <IconText icon={ArrowUpOutlined} text={item.up_vote_count}/>,
-                        <IconText icon={EyeOutlined} text={item.view_count}/>,
-                        <IconText icon={BarsOutlined} text={item.answer_count}/>,
-                        <IconText icon={CommentOutlined} text={item.comment_count}/>
+                        <IconText
+                            icon={ArrowUpOutlined}
+                            text={item.up_vote_count}
+                            title={'Upvote Count'}
+                        />,
+                        <IconText
+                            icon={EyeOutlined}
+                            text={item.view_count}
+                            title={'View Count'}
+                        />,
+                        <IconText
+                            icon={BarsOutlined}
+                            text={item.answer_count}
+                            title={'Answer Count'}
+                        />,
+                        <IconText
+                            icon={CommentOutlined}
+                            text={item.comment_count}
+                            title={'Comment Count'}
+                        />
                     ]}
                     key={item.question_id}>
                     <List.Item.Meta
                         title={item.title}
-                        description={<Space><TagsOutlined/> {item.tags.map(item => <Tag>{item}</Tag>)} </Space>}
+                        description={<Space>
+                            <Tooltip title={'Tags'}>
+                                <TagsOutlined/>
+                            </Tooltip> {item.tags.map(item => <Tag>{item}</Tag>)} </Space>}
                     />
                 </List.Item>
             )}

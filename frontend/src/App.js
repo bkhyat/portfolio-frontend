@@ -2,10 +2,11 @@ import './App.less';
 import Sidebar from "./component/Sidebar";
 import {Layout} from "antd";
 import {useSelector} from "react-redux";
-import Credits from "./component/credits";
 import Resume from "./component/resume";
 import Todo from "./component/todo";
+import {Route, Routes} from "react-router-dom";
 import Stackoverflow from "./component/stackoverflow";
+import Credits from "./component/credits";
 
 const {Sider, Content} = Layout
 const App = () => {
@@ -17,11 +18,21 @@ const App = () => {
                 <Sidebar/>
             </Sider>
             <Content style={{margin: '0 16px'}}>
-                {currentNavItem === 'resume' ? <Resume/> :
-                    currentNavItem === 'to-do' ? <Todo/> :
-                        currentNavItem === 'stackoverflow' ? <Stackoverflow/> :
-                            currentNavItem === 'credits' ? <Credits/> : ''
-                }
+                <Routes>
+                    <Route path={''} element={<Resume/>}/>
+                    <Route path={'/demo/todo'} element={<Todo/>}/>
+                    <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
+                    <Route path={'/credits'} element={<Credits/>}/>
+                    <Route path={'*'} element={<>
+                        <div style={{textAlign: 'center', padding: '200px'}}><h2>Error 404</h2><h5>Seems like you have
+                            come to the end of the world!</h5></div>
+                    </>}/>
+                </Routes>
+                {/*{currentNavItem === 'resume' ? <Resume/> :*/}
+                {/*    currentNavItem === 'to-do' ? <Todo/> :*/}
+                {/*        currentNavItem === 'stackoverflow' ? <Stackoverflow/> :*/}
+                {/*            currentNavItem === 'credits' ? <Credits/> : ''*/}
+                {/*}*/}
             </Content>
         </Layout>
     );

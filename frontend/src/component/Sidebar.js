@@ -10,16 +10,15 @@ const Sidebar = () => {
     const onNavItemSelect = ({key}) => {
         dispatch(navItemChanged(key))
     }
-
     return (
         <Menu
             mode={'inline'}
             onClick={onNavItemSelect}
             theme={'dark'}
             items={NAV_ITEMS}
-            selectedKeys={currentNavItem}
+            selectedKeys={window.location.pathname}
         />
     )
 }
 
-export default Sidebar
+export default Sidebar;

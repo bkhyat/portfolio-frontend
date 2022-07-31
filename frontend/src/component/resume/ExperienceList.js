@@ -59,13 +59,13 @@ const Experience = ({experience}) => {
                 headStyle={{fontWeight: 'normal'}}
             />
             <Card.Grid style={{width: '70%'}} hoverable={false}>
-                <ul>{experience.bullets.map(item => <li>{item}</li>)}</ul>
+                <ul>{experience.bullets.map((item, index) => <li key={index}>{item}</li>)}</ul>
 
             </Card.Grid>
             <Card.Grid style={{width: '30%'}} hoverable={false}>
                 <Space direction={'vertical'}>
                     <Typography.Text strong>Relevant Skills:</Typography.Text>
-                    <Space wrap>{experience.skills.map(item => <Tag>{item}</Tag>)}</Space>
+                    <Space wrap>{experience.skills.map((item, index) => <Tag key={index}>{item}</Tag>)}</Space>
                 </Space>
             </Card.Grid>
         </>
@@ -75,8 +75,8 @@ const ExperienceList = ({experiences}) => {
 
     return (
         <Card>
-            {experiences.map(experience => (
-                <Experience experience={experience}/>
+            {experiences.map((experience, index) => (
+                <Experience experience={experience} key={index}/>
             ))}
         </Card>
     )

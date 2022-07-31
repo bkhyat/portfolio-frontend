@@ -26,11 +26,6 @@ const App = () => {
                             come to the end of the world!</h5></div>
                     </>}/>
                 </Routes>
-                {/*{currentNavItem === 'resume' ? <Resume/> :*/}
-                {/*    currentNavItem === 'to-do' ? <Todo/> :*/}
-                {/*        currentNavItem === 'stackoverflow' ? <Stackoverflow/> :*/}
-                {/*            currentNavItem === 'credits' ? <Credits/> : ''*/}
-                {/*}*/}
             </Content>
         </Layout>
     );

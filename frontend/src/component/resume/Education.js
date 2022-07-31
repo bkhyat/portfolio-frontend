@@ -31,7 +31,7 @@ const EducationItem = ({education}) => {
 const Education = ({educations}) => {
 
     return <>
-        {(educations || []).map(education => <EducationItem education={education}/>)}
+        {(educations || []).map(education => <EducationItem education={education} key={education.level}/>)}
     </>
 
 }

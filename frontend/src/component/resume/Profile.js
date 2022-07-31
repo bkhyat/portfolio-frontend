@@ -1,7 +1,7 @@
 const Profile = ({profiles}) => {
 
     return <ul>
-        {profiles.map(item => <li>{item}</li>)}
+        {profiles.map((item, index) => <li key={index}>{item}</li>)}
     </ul>
 }
 

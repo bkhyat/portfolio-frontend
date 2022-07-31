@@ -44,7 +44,6 @@ const showDeleteConfirm = (id) => {
         onOk() {
             return axios.delete(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/' + id)
                 .then(resp => {
-                    console.log(resp.data)
                     message.success("Todo Deleted Successfully!", 3)
                 })
                 .catch(error => {

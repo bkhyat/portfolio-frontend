@@ -12,18 +12,18 @@ const Skills = ({skills}) => {
                 Soft
             </Divider>
             <ul>
-                {skills.soft_skills.map(item => <li>{item}</li>)}
+                {skills.soft_skills.map((item, index) => <li key={index}>{item}</li>)}
             </ul>
             <Divider orientation={'left'} plain orientationMargin={0}>
                 Technical
             </Divider>
             <ul>
                 <Space direction={'vertical'}>
-                    {Object.keys(skills.tech_skills).map(key => <li>
+                    {Object.keys(skills.tech_skills).map(key => <li key={key}>
                         <Typography.Text strong>{key}</Typography.Text> <br/>
                         {/*<ul>*/}
                         <Space size={skills.tech_skills[key].map(() => 1)} wrap>{skills.tech_skills[key].map(item =>
-                            <Tag>{item?.name}</Tag>)}</Space>
+                            <Tag key={item.name}>{item?.name}</Tag>)}</Space>
                         {/*</ul>*/}
                     </li>)}
                 </Space>

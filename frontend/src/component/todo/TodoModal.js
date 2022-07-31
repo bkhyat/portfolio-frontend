@@ -28,7 +28,6 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
         } else {
             axios.post(todosURL, values.todos)
                 .then(resp => {
-                    console.log(resp.data)
                     message.success('New todo created successfully!', 3)
                     toggleVisible();
                 })

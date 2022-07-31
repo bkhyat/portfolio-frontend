@@ -1,7 +1,9 @@
-import {Badge, Card, Checkbox, Divider, message, Space} from "antd";
-import {DeleteOutlined, EditOutlined, LoadingOutlined} from "@ant-design/icons";
+import {Badge, Card, Checkbox, Divider, message, Modal, Space} from "antd";
+import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 import axios from "axios";
 import {useState} from "react";
+
+const {confirm} = Modal
 
 const CompleteToggle = ({is_complete, id}) => {
     const [isComplete, setIsComplete] = useState(is_complete)
@@ -34,19 +36,30 @@ const EditOption = ({id, onEditClick}) => {
     return <span onClick={() => onEditClick(id)} style={{cursor: 'pointer'}}><EditOutlined/> Edit</span>
 }
 
+const showDeleteConfirm = (id) => {
+    confirm({
+        title: "Delete Todo",
+        icon: <ExclamationCircleOutlined/>,
+        content: 'Are you sure you want to delete the todo?',
+        onOk() {
+            return axios.delete(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/' + id)
+                .then(resp => {
+                    console.log(resp.data)
+                    message.success("Todo Deleted Successfully!", 3)
+                })
+                .catch(error => {
+                    console.log(error)
+                    message.error("Could not delete at the moment! Try again later", 3)
+                })
+        },
+        onCancel() {
+        },
+    })
+}
+
+
 const DeleteOption = ({id}) => {
-    const onDelete = (id) => {
-        axios.delete(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/' + id)
-            .then(resp => {
-                console.log(resp.data)
-                message.success("Todo Deleted Successfully!", 3)
-            })
-            .catch(error => {
-                console.log(error)
-                message.error("Could not delete at the moment! Try again later", 3)
-            })
-    }
-    return <span onClick={() => onDelete(id)} style={{color: 'red', cursor: 'pointer'}}><DeleteOutlined/> Delete</span>
+    return <span onClick={() => showDeleteConfirm(id)} style={{color: 'red', cursor: 'pointer'}}><DeleteOutlined/> Delete</span>
 }
 
 const TodoItem = ({todo, onEditTodo}) => {

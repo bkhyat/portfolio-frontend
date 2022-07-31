@@ -51,7 +51,13 @@ const Experience = ({experience}) => {
 
     return (
         <>
-            <Card title={titleLeft} extra={titleRight} style={{width: '100%'}} size={'small'}/>
+            <Card
+                title={titleLeft}
+                extra={titleRight}
+                style={{width: '100%'}}
+                size={'small'}
+                headStyle={{fontWeight: 'normal'}}
+            />
             <Card.Grid style={{width: '70%'}} hoverable={false}>
                 <ul>{experience.bullets.map(item => <li>{item}</li>)}</ul>
 
@@ -68,7 +74,7 @@ const Experience = ({experience}) => {
 const ExperienceList = ({experiences}) => {
 
     return (
-        <Card bodyStyle={{maxHeight: '500px', overflowY: 'auto'}}>
+        <Card>
             {experiences.map(experience => (
                 <Experience experience={experience}/>
             ))}

@@ -49,7 +49,7 @@ const Credits = () => {
                                 width: 100
                             }
                         ]}
-                        dataSource={pythonLibraries}
+                        dataSource={pythonLibraries.map(item => ({...item, key: item.library}))}
                         pagination={false}
                         size={'small'}
                         scroll={{y: 500}}
@@ -76,6 +76,7 @@ const Credits = () => {
                             }
                         ]}
                         dataSource={Object.keys(frontendPackages.dependencies).map(key => ({
+                            key,
                             library: key,
                             version: frontendPackages.dependencies[key]
                         }))}

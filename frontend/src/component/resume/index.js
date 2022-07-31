@@ -56,14 +56,14 @@ const Resume = () => {
             <Card>
                 <Card.Grid style={{width: '70%'}} hoverable={false}>
                     <Card title={mainTitle} extra={mainTitleExtra}/>
-                    <Divider plain style={{fontWeight: 'bold'}}>About Me</Divider>
+                    <Divider plain>About Me</Divider>
                     <Profile profiles={resume.profiles}/>
-                    <Divider plain style={{fontWeight: 'bold'}}>Experiences</Divider>
+                    <Divider plain>Experiences</Divider>
                     <ExperienceList experiences={resume.experiences}/>
                 </Card.Grid>
                 <Card.Grid style={{width: '30%'}} hoverable={false}>
                     <Skills skills={resume.skills}/>
-                    <Divider plain style={{fontWeight: 'bold'}}>Education</Divider>
+                    <Divider plain>Education</Divider>
                     <Education educations={resume.educations}/>
                 </Card.Grid>
             </Card>

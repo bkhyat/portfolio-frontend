@@ -1,7 +1,6 @@
 import './App.less';
 import Sidebar from "./component/Sidebar";
 import {Layout} from "antd";
-import {useSelector} from "react-redux";
 import Resume from "./component/resume";
 import Todo from "./component/todo";
 import {Route, Routes} from "react-router-dom";
@@ -10,7 +9,6 @@ import Credits from "./component/credits";
 
 const {Sider, Content} = Layout
 const App = () => {
-    const {currentNavItem} = useSelector(state => state.nav)
 
     return (
         <Layout className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>

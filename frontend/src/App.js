@@ -17,7 +17,7 @@ const App = () => {
             </Sider>
             <Content style={{margin: '0 16px'}}>
                 <Routes>
-                    <Route path={''} element={<Resume/>}/>
+                    <Route path={'/'} element={<Resume/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>
                     <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
                     <Route path={'/credits'} element={<Credits/>}/>

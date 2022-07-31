@@ -8,8 +8,8 @@ const Sidebar = () => {
     useEffect(() => {
         pathChanged()
     }, [])
-
-    const pathChanged = () => setCurrentPath(window.location.pathname)
+    console.log(window.location.hash)
+    const pathChanged = () => setCurrentPath(window.location.hash)
     return (
         <Menu
             mode={'inline'}

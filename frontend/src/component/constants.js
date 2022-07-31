@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 export const NAV_ITEMS = [
     {
         label: <Link to={'/'}>RESUME</Link>,
-        key: '/',
+        key: '#/',
         icon: <ProfileOutlined/>,
     },
     {
@@ -15,7 +15,7 @@ export const NAV_ITEMS = [
         children: [
             {
                 label: <Link to={'demo/todo'}>To Do</Link>,
-                key: '/demo/todo',
+                key: '#/demo/todo',
                 icon: <CalendarOutlined/>
             },
             {
@@ -40,17 +40,17 @@ export const NAV_ITEMS = [
     },
     {
         label: <Link to={'github'}>GITHUB PROFILE</Link>,
-        key: '/github',
+        key: '#/github',
         disabled: true,
         icon: <GithubOutlined/>
     },
     {
         label: <Link to={'stackoverflow'}>STACKOVERFLOW</Link>,
-        key: '/stackoverflow'
+        key: '#/stackoverflow'
     },
     {
         label: <Link to={'credits'}>Credits</Link>,
-        key: '/credits',
+        key: '#/credits',
         icon: <CopyrightCircleOutlined/>
     }
 ]

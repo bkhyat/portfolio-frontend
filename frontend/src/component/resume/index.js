@@ -46,7 +46,7 @@ const Resume = () => {
     const mainTitleExtra = <>
         {/*<Typography.Paragraph style={{textAlign: 'right'}}>*/}
         <Space direction={'vertical'} style={{textAlign: 'right'}}>
-            {(Object.keys(resume.contacts || {})).map(key => <>{getIcon(key, resume.contacts[key])}</>)}
+            {(Object.keys(resume.contacts || {})).map(key => <div key={key}>{getIcon(key, resume.contacts[key])}</div>)}
         </Space>
         {/*</Typography.Paragraph>*/}
     </>

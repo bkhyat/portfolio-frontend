@@ -1,9 +1,10 @@
 import {CalendarOutlined, CopyrightCircleOutlined, GithubOutlined, ProfileOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
 export const NAV_ITEMS = [
     {
-        label: "RESUME",
-        key: "resume",
+        label: <Link to={'/'}>RESUME</Link>,
+        key: '/',
         icon: <ProfileOutlined/>,
     },
     {
@@ -13,8 +14,8 @@ export const NAV_ITEMS = [
         type: 'group',
         children: [
             {
-                label: 'To Do',
-                key: 'to-do',
+                label: <Link to={'demo/todo'}>To Do</Link>,
+                key: '/demo/todo',
                 icon: <CalendarOutlined/>
             },
             {
@@ -38,18 +39,18 @@ export const NAV_ITEMS = [
         ]
     },
     {
-        label: 'GITHUB PROFILE',
-        key: 'github-profile',
+        label: <Link to={'github'}>GITHUB PROFILE</Link>,
+        key: '/github',
         disabled: true,
         icon: <GithubOutlined/>
     },
     {
-        label: 'STACKOVERFLOW',
-        key: 'stackoverflow'
+        label: <Link to={'stackoverflow'}>STACKOVERFLOW</Link>,
+        key: '/stackoverflow'
     },
     {
-        label: "Credits",
-        key: 'credits',
+        label: <Link to={'credits'}>Credits</Link>,
+        key: '/credits',
         icon: <CopyrightCircleOutlined/>
     }
 ]

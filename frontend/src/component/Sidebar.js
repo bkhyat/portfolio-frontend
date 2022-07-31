@@ -1,25 +1,25 @@
-import {useDispatch, useSelector} from "react-redux";
 import {Menu} from "antd";
-import {navItemChanged} from "../rtk/nav/slices";
 import {NAV_ITEMS} from "./constants";
+import {useEffect, useState} from "react";
 
 const Sidebar = () => {
-    const {currentNavItem} = useSelector(state => state.nav)
-    const dispatch = useDispatch();
+    const [currentPath, setCurrentPath] = useState('')
 
-    const onNavItemSelect = ({key}) => {
-        dispatch(navItemChanged(key))
-    }
+    useEffect(() => {
+        pathChanged()
+    }, [])
 
+    const pathChanged = () => setCurrentPath(window.location.pathname)
     return (
         <Menu
             mode={'inline'}
-            onClick={onNavItemSelect}
+            onClick={pathChanged}
             theme={'dark'}
             items={NAV_ITEMS}
-            selectedKeys={currentNavItem}
+            defaultSelectedKeys={['/']}
+            selectedKeys={currentPath}
         />
     )
 }
 
-export default Sidebar
+export default Sidebar;

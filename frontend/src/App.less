@@ -67,3 +67,26 @@ ul {
 .ant-card-head {
   background: transparent;
 }
+
+.footer-div-for-print {
+  display: none;
+  position: fixed;
+  bottom: 5px;
+}
+
+@page {
+  size: A4;
+  margin: 2mm;
+}
+
+@media print {
+  .side-nav {
+    display: none;
+  }
+
+  .footer-div-for-print {
+    display: block;
+  }
+
+  page-break-inside: avoid !important;
+}

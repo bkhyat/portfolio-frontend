@@ -12,7 +12,7 @@ const App = () => {
 
     return (
         <Layout hasSider className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
-            <Sider collapsible={true}>
+            <Sider collapsible={true} className={'side-nav'}>
                 <div className={'logo'}/>
                 <Sidebar/>
             </Sider>

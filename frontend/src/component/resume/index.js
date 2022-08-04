@@ -6,8 +6,9 @@ import Profile from "./Profile";
 import Skills from "./skills";
 import ExperienceList from "./ExperienceList";
 import Education from "./Education";
-import {GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined} from "@ant-design/icons";
+import {GithubOutlined, HomeOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import {StackoverflowIcon} from "../../assets/icons";
+import Achievements from "./achievements";
 
 
 const Resume = () => {
@@ -27,7 +28,7 @@ const Resume = () => {
         </Typography.Text>
         <Typography.Text>
             {resume.titleExtra || 'NEC Reg: 8613 | Python | Django | React | Rest API | Regex | pandas | R'} <br/>
-            {resume.address || 'Kathmandu, Nepal'}
+            <HomeOutlined/> {resume.address || 'Kathmandu, Nepal'}
         </Typography.Text>
     </>
 
@@ -48,11 +49,9 @@ const Resume = () => {
         }
     }
     const mainTitleExtra = <>
-        {/*<Typography.Paragraph style={{textAlign: 'right'}}>*/}
         <div style={{textAlign: 'right', gap: 0}}>
             {(Object.keys(resume.contacts || {})).map(key => <div key={key}>{getIcon(key, resume.contacts[key])}</div>)}
         </div>
-        {/*</Typography.Paragraph>*/}
     </>
 
 //     return (
@@ -79,7 +78,7 @@ const Resume = () => {
     return (
         <Spin spinning={isResumeLoading} tip={'Hold on! Fetching Resume'}>
             <Card style={{margin: '15px 5px 1px 1px ', border: '1px solid rgb(240, 240, 240)'}} bordered={false}>
-                <Card.Grid style={{width: '70%', padding: 0, boxShadow: "none"}} hoverable={false}>
+                <Card.Grid style={{width: '65%', padding: 0, boxShadow: "none"}} hoverable={false}>
                     <Card
                         size={'small'}
                         title={mainTitle}
@@ -93,13 +92,16 @@ const Resume = () => {
                     <ExperienceList experiences={resume.experiences}/>
                 </Card.Grid>
                 <Card.Grid
-                    style={{width: '30%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
+                    style={{width: '35%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
                     hoverable={false}>
                     <Skills skills={resume.skills}/>
                     <Divider style={{marginBottom: -10}}>Education</Divider>
                     <Education educations={resume.educations}/>
+                    <Divider>Achievements & Enrollments</Divider>
+                    <Achievements achievements={resume.achievements}/>
                 </Card.Grid>
             </Card>
+            <div className={'footer-div-for-print'}>https://bkhyat.github.io | {Date().toLocaleString()}</div>
         </Spin>
     )
 }

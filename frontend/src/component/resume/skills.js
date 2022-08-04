@@ -5,17 +5,18 @@ const Skills = ({skills}) => {
 
     return (
         <>
-            <Divider plain>
-                Skills
+            <Divider>
+                Soft Skills
             </Divider>
-            <Divider orientation={'left'} plain orientationMargin={0}>
-                Soft
-            </Divider>
+            {/*<Divider orientation={'left'} plain orientationMargin={0}>*/}
+            {/*    Soft*/}
+            {/*</Divider>*/}
             <ul>
                 {skills.soft_skills.map((item, index) => <li key={index}>{item}</li>)}
             </ul>
-            <Divider orientation={'left'} plain orientationMargin={0}>
-                Technical
+            {/*<Divider orientation={'left'} plain orientationMargin={0}>*/}
+            <Divider>
+                Technical Skills
             </Divider>
             <ul>
                 <Space direction={'vertical'}>

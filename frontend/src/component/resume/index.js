@@ -7,6 +7,7 @@ import Skills from "./skills";
 import ExperienceList from "./ExperienceList";
 import Education from "./Education";
 import {GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined} from "@ant-design/icons";
+import {StackoverflowIcon} from "../../assets/icons";
 
 
 const Resume = () => {
@@ -21,10 +22,13 @@ const Resume = () => {
         <Typography.Title level={3} style={{color: '#bf58bf'}}>
             {`${resume.first_name || 'Er. Bikhyat'} ${resume.last_name || 'Adhikari'}`}
         </Typography.Title>
-        <Typography.Paragraph strong>
+        <Typography.Text strong>
             {resume.designation || 'Software Engineer & Team Lead'} <br/>
+        </Typography.Text>
+        <Typography.Text>
+            {resume.titleExtra || 'NEC Reg: 8613 | Python | Django | React | Rest API | Regex | pandas | R'} <br/>
             {resume.address || 'Kathmandu, Nepal'}
-        </Typography.Paragraph>
+        </Typography.Text>
     </>
 
     const getIcon = (icon, value) => {
@@ -38,7 +42,7 @@ const Resume = () => {
             case "GitHub":
                 return <Space><a href={value} target={'_blank'} rel="noreferrer">{value}</a><GithubOutlined/></Space>
             case "StackOverflow":
-                return <a href={value} target={'_blank'} rel="noreferrer">{value}</a>
+                return <Space><a href={value} target={'_blank'} rel="noreferrer">{value}</a><StackoverflowIcon/></Space>
             default:
                 return value
         }
@@ -82,7 +86,7 @@ const Resume = () => {
                         extra={mainTitleExtra}
                         bordered={false}
                         style={{boxShadow: 'none', border: 0, background: "transparent"}}
-                        headStyle={{border: 0}}/>
+                        headStyle={{border: 0, fontWeight: 'normal'}}/>
                     <Divider style={{marginTop: 0}}>About Me</Divider>
                     <Profile profiles={resume.profiles}/>
                     <Divider style={{marginBottom: -10}}>Experiences</Divider>

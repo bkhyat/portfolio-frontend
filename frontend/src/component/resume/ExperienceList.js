@@ -36,49 +36,50 @@ const Experience = ({experience}) => {
 
         return value
     }
-    const titleLeft = <>
+    const titleLeft = <Typography.Paragraph style={{margin: 0}}>
         <Typography.Text strong> {experience.designation} </Typography.Text> <br/>
         <Typography.Text italic>{experience.organization}</Typography.Text>
-    </>
-    const titleRight = <>
-        <Typography.Paragraph style={{textAlign: 'right'}}>
-            <Typography.Text
-                strong>{parseDate(experience.start_date)} - {parseDate(experience.end_date)}</Typography.Text> <br/>
-            <Typography.Text italic> {getDuration(experience.start_date, experience.end_date)}</Typography.Text>
-        </Typography.Paragraph>
-    </>
+    </Typography.Paragraph>
+    const titleRight = <Typography.Paragraph style={{textAlign: 'right', margin: 0}}>
+        <Typography.Text
+            strong>{parseDate(experience.start_date)} - {parseDate(experience.end_date)}</Typography.Text> <br/>
+        <Typography.Text italic> {getDuration(experience.start_date, experience.end_date)}</Typography.Text>
+    </Typography.Paragraph>
 
 
     return (
-        <>
-            <Card
-                title={titleLeft}
-                extra={titleRight}
-                style={{width: '100%'}}
-                size={'small'}
-                headStyle={{fontWeight: 'normal'}}
-            />
-            <Card.Grid style={{width: '70%'}} hoverable={false}>
-                <ul>{experience.bullets.map((item, index) => <li key={index}>{item}</li>)}</ul>
+        <Card
+            title={titleLeft}
+            extra={titleRight}
+            style={{width: '100%', background: 'transparent'}}
+            size={'small'}
+            headStyle={{fontWeight: 'normal'}}
+            bordered={false}
+            bodyStyle={{borderBottom: '1px solid #f0f0f0'}}
+        >
+            <Card.Grid style={{width: '70%', padding: '12px 6px 6px 0', boxShadow: 'none'}} hoverable={false}>
+                <ul style={{textAlign: 'justify'}}>{experience.bullets.map((item, index) => <li
+                    key={index}>{item}</li>)}</ul>
 
             </Card.Grid>
-            <Card.Grid style={{width: '30%'}} hoverable={false}>
+            <Card.Grid style={{width: '30%', padding: '12px 6px 6px 6px', boxShadow: 'none'}} hoverable={false}>
                 <Space direction={'vertical'}>
                     <Typography.Text strong>Relevant Skills:</Typography.Text>
-                    <Space wrap>{experience.skills.map((item, index) => <Tag key={index}>{item}</Tag>)}</Space>
+                    <Space wrap style={{gap: 8}}>{experience.skills.map((item, index) => <Tag
+                        key={index}>{item}</Tag>)}</Space>
                 </Space>
             </Card.Grid>
-        </>
+        </Card>
     )
 }
 const ExperienceList = ({experiences}) => {
 
     return (
-        <Card>
+        <>
             {experiences.map((experience, index) => (
                 <Experience experience={experience} key={index}/>
             ))}
-        </Card>
+        </>
     )
 }
 

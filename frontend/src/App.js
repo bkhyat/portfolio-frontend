@@ -11,8 +11,9 @@ const {Sider, Content} = Layout
 const App = () => {
 
     return (
-        <Layout className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
+        <Layout hasSider className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
             <Sider collapsible={true}>
+                <div className={'logo'}/>
                 <Sidebar/>
             </Sider>
             <Content style={{margin: '0 16px'}}>

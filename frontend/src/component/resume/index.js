@@ -45,25 +45,54 @@ const Resume = () => {
     }
     const mainTitleExtra = <>
         {/*<Typography.Paragraph style={{textAlign: 'right'}}>*/}
-        <Space direction={'vertical'} style={{textAlign: 'right'}}>
+        <div style={{textAlign: 'right', gap: 0}}>
             {(Object.keys(resume.contacts || {})).map(key => <div key={key}>{getIcon(key, resume.contacts[key])}</div>)}
-        </Space>
+        </div>
         {/*</Typography.Paragraph>*/}
     </>
 
+//     return (
+//         <Spin spinning={isResumeLoading} tip={'Hold on! Fetching Resume'}>
+//             <Row style={{background: '#fff', margin: '5px'}} gutter={20}>
+//                 <Col span={16}>
+//                     <Card title={mainTitle} extra={mainTitleExtra}>
+//                         <Divider plain>About Me</Divider>
+//                         <Profile profiles={resume.profiles}/>
+//                         <Divider plain>Experiences</Divider>
+//                         <ExperienceList experiences={resume.experiences}/>
+//                     </Card>
+//                 </Col>
+//                 <Col span={8}>
+//                     <Skills skills={resume.skills}/>
+//                     <Divider plain>Education</Divider>
+//                     <Education educations={resume.educations}/>
+//                 </Col>
+//             </Row>
+//         </Spin>
+//     )
+// }
+
     return (
         <Spin spinning={isResumeLoading} tip={'Hold on! Fetching Resume'}>
-            <Card>
-                <Card.Grid style={{width: '70%'}} hoverable={false}>
-                    <Card title={mainTitle} extra={mainTitleExtra}/>
-                    <Divider plain>About Me</Divider>
+            <Card style={{margin: '15px 5px 1px 1px ', border: '1px solid rgb(240, 240, 240)'}} bordered={false}>
+                <Card.Grid style={{width: '70%', padding: 0, boxShadow: "none"}} hoverable={false}>
+                    <Card
+                        size={'small'}
+                        title={mainTitle}
+                        extra={mainTitleExtra}
+                        bordered={false}
+                        style={{boxShadow: 'none', border: 0, background: "transparent"}}
+                        headStyle={{border: 0}}/>
+                    <Divider style={{marginTop: 0}}>About Me</Divider>
                     <Profile profiles={resume.profiles}/>
-                    <Divider plain>Experiences</Divider>
+                    <Divider style={{marginBottom: -10}}>Experiences</Divider>
                     <ExperienceList experiences={resume.experiences}/>
                 </Card.Grid>
-                <Card.Grid style={{width: '30%'}} hoverable={false}>
+                <Card.Grid
+                    style={{width: '30%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
+                    hoverable={false}>
                     <Skills skills={resume.skills}/>
-                    <Divider plain>Education</Divider>
+                    <Divider style={{marginBottom: -10}}>Education</Divider>
                     <Education educations={resume.educations}/>
                 </Card.Grid>
             </Card>

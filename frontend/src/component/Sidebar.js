@@ -8,7 +8,7 @@ const Sidebar = () => {
     useEffect(() => {
         pathChanged()
     }, [])
-    console.log(window.location.hash)
+
     const pathChanged = () => setCurrentPath(window.location.hash)
     return (
         <Menu

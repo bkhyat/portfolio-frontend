@@ -11,7 +11,7 @@ export const NAV_ITEMS = [
         label: "DEMO",
         key: "demo",
         icon: <ProfileOutlined/>,
-        type: 'group',
+        // type: 'group',
         children: [
             {
                 label: <Link to={'demo/todo'}>To Do</Link>,
@@ -46,7 +46,8 @@ export const NAV_ITEMS = [
     },
     {
         label: <Link to={'stackoverflow'}>STACKOVERFLOW</Link>,
-        key: '#/stackoverflow'
+        key: '#/stackoverflow',
+        icon: <GithubOutlined/>
     },
     {
         label: <Link to={'credits'}>Credits</Link>,

@@ -1,14 +1,14 @@
 import {Card, Typography} from "antd";
 
 const EducationItem = ({education}) => {
-    const titleLeft = <>
+    const titleLeft = <div style={{whiteSpace: 'pre-line'}}>
         <Typography.Text strong>
             {education.level} | {education.course}
         </Typography.Text>
-        <Typography.Paragraph italic>
+        <Typography.Paragraph italic style={{margin: 0}}>
             {education.university} <br/>
             {education.school}
-        </Typography.Paragraph></>
+        </Typography.Paragraph></div>
 
     const titleExtra = <>
         <Typography.Text strong>
@@ -19,10 +19,13 @@ const EducationItem = ({education}) => {
         </Typography.Paragraph></>
     return (
         <Card
+            size={'small'}
             title={titleLeft}
             extra={titleExtra}
             headStyle={{fontWeight: 'normal', fontSize: '14px'}}
-            style={{width: '100%'}}
+            style={{width: '100%', background: 'transparent'}}
+            bordered={false}
+            bodyStyle={{borderBottom: '1px solid #f0f0f0'}}
         />
     )
 

@@ -5,8 +5,10 @@ import Todo from "./component/todo";
 import {Route, Routes} from "react-router-dom";
 import Stackoverflow from "./component/stackoverflow";
 import Credits from "./component/credits";
-import Resume from "react-single-page-resume";
-import data from './dat.json'
+import Resume from "./component/resume";
+import Login from "./component/auth/login";
+// import Resume from "react-single-page-resume";
+// import data from './dat.json'
 
 const {Sider, Content} = Layout
 const App = () => {
@@ -18,7 +20,7 @@ const App = () => {
             </Sider>
             <Content style={{margin: '0 16px', background: '#fff'}}>
                 <Routes>
-                    <Route path={'/'} element={<Resume {...data}/>}/>
+                    <Route path={'/'} element={<Resume/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>
                     <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
                     <Route path={'/credits'} element={<Credits/>}/>
@@ -28,6 +30,7 @@ const App = () => {
                     </>}/>
                 </Routes>
             </Content>
+            <Login/>
         </Layout>
     );
 }

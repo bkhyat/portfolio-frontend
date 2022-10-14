@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Card, Col, Divider, message, Row, Spin, Typography} from "antd";
+import {Card, Col, Divider, notification, Row, Spin, Typography} from "antd";
 import TodoModal from "./TodoModal";
 import TodoItem from "./TodoItem";
 
@@ -28,7 +28,7 @@ const Todo = () => {
                 })
             })
             .catch(err => {
-                message.error("Error fetching todos", 3)
+                notification.error("Error fetching todos", 3)
             })
             .finally(() => setFetching(false))
     }, [])

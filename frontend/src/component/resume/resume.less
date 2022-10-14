@@ -1,0 +1,48 @@
+.resume-wrapper {
+  margin: 15px 5px 1px 1px;
+  border: 1px solid rgb(240, 240, 240);
+}
+
+.footer-div-for-print {
+  display: none;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+
+ul {
+  margin: 0;
+}
+
+.ant-card-grid {
+  box-shadow: none;
+}
+
+.ant-card-head {
+  background: transparent;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 1mm;
+  }
+
+  .side-nav {
+    display: none;
+  }
+
+  html, body {
+    overflow: hidden;
+  }
+
+  .relevant-skills {
+    display: none;
+  }
+
+  .footer-div-for-print {
+    display: block;
+  }
+
+  page-break-inside: avoid !important;
+}

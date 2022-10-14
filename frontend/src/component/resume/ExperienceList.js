@@ -1,4 +1,4 @@
-import {Card, Space, Tag, Typography} from "antd";
+import {Card, Col, Row, Space, Tag, Typography} from "antd";
 
 const montNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -57,18 +57,28 @@ const Experience = ({experience}) => {
             bordered={false}
             bodyStyle={{borderBottom: '1px solid #f0f0f0'}}
         >
-            <Card.Grid style={{width: '70%', padding: '12px 6px 6px 0', boxShadow: 'none'}} hoverable={false}>
-                <ul style={{textAlign: 'justify'}}>{experience.bullets.map((item, index) => <li
-                    key={index}>{item}</li>)}</ul>
+            <Row>
+                <Col lg={16}>
+                    <Card.Grid style={{width: '100%', padding: '12px 6px 6px 0', boxShadow: 'none'}} hoverable={false}>
+                        <ul style={{textAlign: 'justify'}}>{experience.bullets.map((item, index) => <li
+                            key={index}>{item}</li>)}</ul>
+                    </Card.Grid>
 
-            </Card.Grid>
-            <Card.Grid style={{width: '30%', padding: '12px 6px 6px 6px', boxShadow: 'none'}} hoverable={false}>
-                <Space direction={'vertical'}>
-                    <Typography.Text strong>Relevant Skills:</Typography.Text>
-                    <Space wrap style={{gap: 8}}>{experience.skills.map((item, index) => <Tag
-                        key={index}>{item}</Tag>)}</Space>
-                </Space>
-            </Card.Grid>
+                </Col>
+                <Col lg={8}>
+                    <Card.Grid style={{width: '100%', padding: '12px 6px 6px 6px', boxShadow: 'none'}}
+                               hoverable={false}>
+                        <Space direction={'vertical'} className={'relevant-skills'}>
+                            <Typography.Text strong>Relevant Skills:</Typography.Text>
+                            <Space wrap style={{gap: 8}}>{experience.skills.map((item, index) => <Tag
+                                key={index}>{item}</Tag>)}</Space>
+                        </Space>
+                    </Card.Grid>
+
+                </Col>
+
+            </Row>
+
         </Card>
     )
 }

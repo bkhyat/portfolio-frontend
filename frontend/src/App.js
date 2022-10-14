@@ -1,24 +1,24 @@
 import './App.less';
 import Sidebar from "./component/Sidebar";
 import {Layout} from "antd";
-import Resume from "./component/resume";
 import Todo from "./component/todo";
 import {Route, Routes} from "react-router-dom";
 import Stackoverflow from "./component/stackoverflow";
 import Credits from "./component/credits";
+import Resume from "react-single-page-resume";
+import data from './dat.json'
 
 const {Sider, Content} = Layout
 const App = () => {
-
     return (
-        <Layout hasSider className="site-layout" style={{minWidth: '1250px', minHeight: '100vh'}}>
-            <Sider collapsible={true}>
+        <Layout hasSider className="site-layout" style={{minHeight: '100vh', background: '#fff'}}>
+            <Sider collapsible={true} className={'side-nav'} collapsedWidth={40}>
                 <div className={'logo'}/>
                 <Sidebar/>
             </Sider>
-            <Content style={{margin: '0 16px'}}>
+            <Content style={{margin: '0 16px', background: '#fff'}}>
                 <Routes>
-                    <Route path={'/'} element={<Resume/>}/>
+                    <Route path={'/'} element={<Resume {...data}/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>
                     <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
                     <Route path={'/credits'} element={<Credits/>}/>

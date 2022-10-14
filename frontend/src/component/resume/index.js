@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchResume} from "../../rtk/resume/slices";
-import {Card, Divider, Space, Spin, Typography} from "antd";
+import {Card, Col, Divider, Row, Space, Spin, Typography} from "antd";
 import Profile from "./Profile";
 import Skills from "./skills";
 import ExperienceList from "./ExperienceList";
@@ -9,6 +9,7 @@ import Education from "./Education";
 import {GithubOutlined, HomeOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import {StackoverflowIcon} from "../../assets/icons";
 import Achievements from "./achievements";
+import './resume.less';
 
 
 const Resume = () => {
@@ -77,29 +78,41 @@ const Resume = () => {
 
     return (
         <Spin spinning={isResumeLoading} tip={'Hold on! Fetching Resume'}>
-            <Card style={{margin: '15px 5px 1px 1px ', border: '1px solid rgb(240, 240, 240)'}} bordered={false}>
-                <Card.Grid style={{width: '65%', padding: 0, boxShadow: "none"}} hoverable={false}>
-                    <Card
-                        size={'small'}
-                        title={mainTitle}
-                        extra={mainTitleExtra}
-                        bordered={false}
-                        style={{boxShadow: 'none', border: 0, background: "transparent"}}
-                        headStyle={{border: 0, fontWeight: 'normal'}}/>
-                    <Divider style={{marginTop: 0}}>About Me</Divider>
-                    <Profile profiles={resume.profiles}/>
-                    <Divider style={{marginBottom: -10}}>Experiences</Divider>
-                    <ExperienceList experiences={resume.experiences}/>
-                </Card.Grid>
-                <Card.Grid
-                    style={{width: '35%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
-                    hoverable={false}>
-                    <Skills skills={resume.skills}/>
-                    <Divider style={{marginBottom: -10}}>Education</Divider>
-                    <Education educations={resume.educations}/>
-                    <Divider>Achievements & Enrollments</Divider>
-                    <Achievements achievements={resume.achievements}/>
-                </Card.Grid>
+            <Card
+                // style={{}}
+                className={'resume-wrapper'}
+                bordered={false}>
+                <Row>
+                    <Col md={16}>
+                        <Card.Grid style={{width: '100%', padding: 0, boxShadow: "none"}} hoverable={false}>
+                            <Card
+                                size={'small'}
+                                title={mainTitle}
+                                extra={mainTitleExtra}
+                                bordered={false}
+                                style={{boxShadow: 'none', border: 0, background: "transparent"}}
+                                headStyle={{border: 0, fontWeight: 'normal'}}/>
+                            <Divider style={{marginTop: 0}}>About Me</Divider>
+                            <Profile profiles={resume.profiles}/>
+                            <Divider style={{marginBottom: -10}}>Experiences</Divider>
+                            <ExperienceList experiences={resume.experiences}/>
+                        </Card.Grid>
+
+                    </Col>
+                    <Col md={8}>
+                        <Card.Grid
+                            style={{width: '100%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
+                            hoverable={false}>
+                            <Skills skills={resume.skills}/>
+                            <Divider style={{marginBottom: -10}}>Education</Divider>
+                            <Education educations={resume.educations}/>
+                            <Divider>Achievements & Enrollments</Divider>
+                            <Achievements achievements={resume.achievements}/>
+                        </Card.Grid>
+
+                    </Col>
+
+                </Row>
             </Card>
             <div className={'footer-div-for-print'}>https://bkhyat.github.io | {Date().toLocaleString()}</div>
         </Spin>

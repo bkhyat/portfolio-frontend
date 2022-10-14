@@ -1,4 +1,11 @@
-import {CalendarOutlined, CopyrightCircleOutlined, GithubOutlined, ProfileOutlined} from "@ant-design/icons";
+import {
+    CalendarOutlined,
+    CopyrightCircleOutlined,
+    GithubOutlined,
+    LoginOutlined,
+    LogoutOutlined,
+    ProfileOutlined
+} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 
 export const NAV_ITEMS = [
@@ -53,5 +60,16 @@ export const NAV_ITEMS = [
         label: <Link to={'credits'}>Credits</Link>,
         key: '#/credits',
         icon: <CopyrightCircleOutlined/>
+    }
+    ,
+    {
+        label: 'Login',
+        key: 'login',
+        icon: <LoginOutlined/>
+    },
+    {
+        label: 'Logout',
+        key: 'logout',
+        icon: <LogoutOutlined/>
     }
 ]

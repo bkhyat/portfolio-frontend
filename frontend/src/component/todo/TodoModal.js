@@ -1,4 +1,4 @@
-import {message, Modal} from "antd";
+import {Modal, notification} from "antd";
 import {useForm} from "antd/es/form/Form";
 import {useState} from "react";
 import axios from "axios";
@@ -17,24 +17,24 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
                 .then(
                     resp => {
                         console.log(resp.data)
-                        message.success('Todo updated successfully', 3)
+                        notification.success('Todo updated successfully', 3)
                         toggleVisible();
                     }
                 )
                 .catch(error => {
-                    message.error("Error updating todo, try again!", 3)
+                    notification.error("Error updating todo, try again!", 3)
                 })
                 .finally(() => setPushingData(false))
         } else {
             axios.post(todosURL, values.todos)
                 .then(resp => {
-                    message.success('New todo created successfully!', 3)
+                    notification.success('New todo created successfully!', 3)
                     toggleVisible();
                 })
                 .catch(
                     err => {
                         console.log(err)
-                        message("An error occurred while creating new todo, try again!", 3)
+                        notification.error("An error occurred while creating new todo, try again!", 3)
                     }
                 )
                 .finally(() => setPushingData(false))

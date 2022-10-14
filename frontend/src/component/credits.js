@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Col, Divider, message, Row, Space, Spin, Table, Typography} from "antd";
+import {Col, Divider, notification, Row, Space, Spin, Table, Typography} from "antd";
 import frontendPackages from '../../package.json'
 
 const Credits = () => {
@@ -18,7 +18,7 @@ const Credits = () => {
                     setFetched(true)
                 })
                 .catch(error => {
-                    message.error("Error fetching Python Libraries", 3)
+                    notification.error("Error fetching Python Libraries", 3)
                     setLoading(false)
                     setFetched(false)
                 })

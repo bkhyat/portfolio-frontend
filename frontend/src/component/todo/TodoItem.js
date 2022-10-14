@@ -1,4 +1,4 @@
-import {Badge, Card, Checkbox, Divider, message, Modal, Space} from "antd";
+import {Badge, Card, Checkbox, Divider, Modal, notification, Space} from "antd";
 import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 import axios from "axios";
 import {useState} from "react";
@@ -16,7 +16,7 @@ const CompleteToggle = ({is_complete, id}) => {
             })
             .catch(err => {
                 console.log(err)
-                message.error("An error occurred! Try again later.", 3)
+                notification.error("An error occurred! Try again later.", 3)
             })
             .finally(() => {
                 setLoading(false)
@@ -44,11 +44,11 @@ const showDeleteConfirm = (id) => {
         onOk() {
             return axios.delete(process.env.REACT_APP_API_BASE_URL + '/todo/v1/todos/' + id)
                 .then(resp => {
-                    message.success("Todo Deleted Successfully!", 3)
+                    notification.success("Todo Deleted Successfully!", 3)
                 })
                 .catch(error => {
                     console.log(error)
-                    message.error("Could not delete at the moment! Try again later", 3)
+                    notification.error("Could not delete at the moment! Try again later", 3)
                 })
         },
         onCancel() {

@@ -16,7 +16,7 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
             axios.patch(todosURL + `${todo[0].id}/`, {title, description, is_completed})
                 .then(
                     resp => {
-                        console.log(resp.data)
+                        (resp.data)
                         notification.success('Todo updated successfully', 3)
                         toggleVisible();
                     }
@@ -33,7 +33,7 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
                 })
                 .catch(
                     err => {
-                        console.log(err)
+                        (err)
                         notification.error("An error occurred while creating new todo, try again!", 3)
                     }
                 )

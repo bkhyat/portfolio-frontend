@@ -15,7 +15,7 @@ const CompleteToggle = ({is_complete, id}) => {
                 setIsComplete(resp.data.is_completed)
             })
             .catch(err => {
-                console.log(err)
+                (err)
                 notification.error("An error occurred! Try again later.", 3)
             })
             .finally(() => {
@@ -47,7 +47,7 @@ const showDeleteConfirm = (id) => {
                     notification.success("Todo Deleted Successfully!", 3)
                 })
                 .catch(error => {
-                    console.log(error)
+                    (error)
                     notification.error("Could not delete at the moment! Try again later", 3)
                 })
         },

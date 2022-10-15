@@ -1,7 +1,7 @@
 import {Modal, notification} from "antd";
 import {useForm} from "antd/es/form/Form";
 import {useState} from "react";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import ToDoForm from "./TodoForm";
 
 

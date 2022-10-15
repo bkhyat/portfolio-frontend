@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axiosConfig";
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + "/resume/v1"
 const TIME_OUT = 7000

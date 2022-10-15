@@ -1,6 +1,6 @@
 import {Badge, Card, Checkbox, Divider, Modal, notification, Space} from "antd";
 import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LoadingOutlined} from "@ant-design/icons";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import {useState} from "react";
 
 const {confirm} = Modal

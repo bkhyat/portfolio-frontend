@@ -1,6 +1,6 @@
 import {Badge, Card, Checkbox, Divider, Modal, notification, Space} from "antd";
 import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LoadingOutlined} from "@ant-design/icons";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import {useState} from "react";
 
 const {confirm} = Modal
@@ -15,8 +15,10 @@ const CompleteToggle = ({is_complete, id}) => {
                 setIsComplete(resp.data.is_completed)
             })
             .catch(err => {
-                console.log(err)
-                notification.error("An error occurred! Try again later.", 3)
+                notification.error({
+                    message: "Error",
+                    description: "An error occurred while marking to do as completed, please try again later!"
+                })
             })
             .finally(() => {
                 setLoading(false)
@@ -47,8 +49,10 @@ const showDeleteConfirm = (id) => {
                     notification.success("Todo Deleted Successfully!", 3)
                 })
                 .catch(error => {
-                    console.log(error)
-                    notification.error("Could not delete at the moment! Try again later", 3)
+                    notification.error({
+                        message: "Error while deleting Todo",
+                        description: "Could not delete at the moment! Try again later"
+                    })
                 })
         },
         onCancel() {

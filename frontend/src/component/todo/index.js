@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
+import axios from "../../axiosConfig";
 import {Card, Col, Divider, notification, Row, Spin, Typography} from "antd";
 import TodoModal from "./TodoModal";
 import TodoItem from "./TodoItem";

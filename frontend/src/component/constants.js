@@ -1,6 +1,7 @@
 import {
     CalendarOutlined,
     CopyrightCircleOutlined,
+    FieldTimeOutlined,
     GithubOutlined,
     LoginOutlined,
     LogoutOutlined,
@@ -24,6 +25,11 @@ export const NAV_ITEMS = [
                 label: <Link to={'demo/todo'}>To Do</Link>,
                 key: '#/demo/todo',
                 icon: <CalendarOutlined/>
+            },
+            {
+                label: <Link to={'demo/time-logger'}>Time Logger</Link>,
+                key: '#/demo/time-logger',
+                icon: <FieldTimeOutlined/>
             },
             {
                 label: 'Simple Quiz',

@@ -9,10 +9,13 @@ const TimeLogger = () => {
     const {isLoggedIn} = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
+    const dispatchToFetchLogs = () => {
+        dispatch(toggleLoading())
+        dispatch(fetchLogs())
+    }
     useEffect(() => {
         if (isLoggedIn) {
-            dispatch(toggleLoading())
-            dispatch(fetchLogs())
+            dispatchToFetchLogs()
         } else {
             notification.error({
                 message: "You need to login!",
@@ -21,6 +24,14 @@ const TimeLogger = () => {
         }
 
     }, [])
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatchToFetchLogs()
+        } else {
+            // Clear logs when user logs out
+        }
+    }, [isLoggedIn])
 
     return <Row>
         <Card style={{width: '30%'}}>

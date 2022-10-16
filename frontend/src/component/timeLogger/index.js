@@ -1,16 +1,24 @@
 import {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchLogs, toggleLoading} from "../../rtk/timeLogger/slices";
-import {Card, Divider, Row,} from "antd";
+import {Card, Divider, notification, Row,} from "antd";
 import NewTimeLogger from "./newTimeLogger";
 import LogOfTheDay from "./logOfTheDay";
 
 const TimeLogger = () => {
+    const {isLoggedIn} = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(toggleLoading())
-        dispatch(fetchLogs())
+        if (isLoggedIn) {
+            dispatch(toggleLoading())
+            dispatch(fetchLogs())
+        } else {
+            notification.error({
+                message: "You need to login!",
+                description: "This app is available for logged in users only"
+            })
+        }
 
     }, [])
 

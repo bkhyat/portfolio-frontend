@@ -15,7 +15,7 @@ const Sidebar = () => {
 
     const pathChanged = (option) => {
         const key = option?.key
-        (key)
+
         switch (key) {
             case 'login':
                 dispatch(toggleLoginModalVisible())

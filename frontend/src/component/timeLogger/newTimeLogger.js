@@ -3,18 +3,18 @@ import {useForm} from "antd/es/form/Form";
 import {useDispatch} from "react-redux";
 import {enterLog} from "../../rtk/timeLogger/slices";
 import {ArrowRightOutlined} from "@ant-design/icons";
+import {DATE_FORMAT, TIME_FORMAT} from "../constants";
 
-const dateFormat = "YYYY-MM-DD"
-const timeFormat = 'HH:mm'
+
 const NewTimeLogger = () => {
     const [form] = useForm()
     const dispatch = useDispatch();
     const onFinish = (values) => {
         const {times, date, ...data} = values
 
-        data['start'] = times[0].format(timeFormat)
-        data['end'] = times[1].format(timeFormat)
-        data['date'] = date.format(dateFormat)
+        data['start'] = times[0].format(TIME_FORMAT)
+        data['end'] = times[1].format(TIME_FORMAT)
+        data['date'] = date.format(DATE_FORMAT)
         dispatch(enterLog(data))
         // form.resetFields()
     }
@@ -26,12 +26,12 @@ const NewTimeLogger = () => {
             onFinish={onFinish}
             form={form}>
             <Form.Item label={"Date"} name={'date'}>
-                <DatePicker format={dateFormat}/>
+                <DatePicker format={DATE_FORMAT}/>
             </Form.Item>
             <Form.Item label={"Times"} name={'times'}
                        rules={[{required: true, message: "Times can not be empty"}]}
             >
-                <TimePicker.RangePicker format={timeFormat}/>
+                <TimePicker.RangePicker format={TIME_FORMAT}/>
             </Form.Item>
             <Form.Item label={"Description"} name={'description'}
                        rules={[{required: true, message: "Description can not be empty"}]}>

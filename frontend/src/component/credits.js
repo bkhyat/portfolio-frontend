@@ -18,7 +18,10 @@ const Credits = () => {
                     setFetched(true)
                 })
                 .catch(error => {
-                    notification.error("Error fetching Python Libraries", 3)
+                    notification.error({
+                        message: "Error Fetching Python Libraries",
+                        description: error.message + '. Please try again later!'
+                    })
                     setLoading(false)
                     setFetched(false)
                 })

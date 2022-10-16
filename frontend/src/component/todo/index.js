@@ -28,7 +28,10 @@ const Todo = () => {
                 })
             })
             .catch(err => {
-                notification.error("Error fetching todos", 3)
+                notification.error({
+                    message: "Error fetching todos",
+                    description: err.message + '. Please try again later'
+                })
             })
             .finally(() => setFetching(false))
     }, [])

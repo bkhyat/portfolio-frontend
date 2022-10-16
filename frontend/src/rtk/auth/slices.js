@@ -25,6 +25,8 @@ export const logout = createAsyncThunk(
         const refresh = thunkAPI.getState().auth.refresh
         try {
             await authService.logout(refresh)
+            localStorage.removeItem("access")
+            notification.success({message: "Logged out", description: "Logged out successfully!"})
         } catch (e) {
             notification.error({
                 message: "Could not log out",
@@ -59,7 +61,6 @@ const authSlice = createSlice(
             },
             [login.rejected]: (state, action) => ({...state, isLoggedIn: false, isLoading: false}),
             [logout.fulfilled]: (state) => {
-                localStorage.removeItem("access")
                 state.isLoggedIn = false
                 state.access = ''
                 state.refresh = ''

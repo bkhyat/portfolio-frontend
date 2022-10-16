@@ -41,6 +41,19 @@ export const enterLog = createAsyncThunk(
     }
 )
 
+export const filterLogs = createAsyncThunk(
+    "timeLogger/filterLogs",
+    async (data, thunkAPI) => {
+        try {
+            const resp = await timeLoggerService.fetchLogs(data)
+            return resp.data
+        } catch (e) {
+            console.log("error fetching log", e.message)
+            return thunkAPI.rejectWithValue()
+        }
+    }
+)
+
 export const fetchWeeklyLogs = createAsyncThunk(
     "timeLogger/fetchWeeklyLogs",
     async (data, thunkAPI) => {
@@ -61,7 +74,12 @@ const initialState = {
     isPushing: false,
     logsOfTheDay: [],
     weeklyLogs: [],
-    logsByDate: {}
+    logsByDate: {},
+    filteredLogs: {
+        dates: [],
+        search: '',
+        logs: []
+    }
 }
 
 const timeLoggerSlice = createSlice(
@@ -95,6 +113,9 @@ const timeLoggerSlice = createSlice(
                         thisWeek: weeklyData['this_week'][day_num] || 0
                     }))
                 }
+            },
+            [filterLogs.fulfilled]: (state, action) => {
+                state.filteredLogs.logs = action.payload
             }
         }
     }

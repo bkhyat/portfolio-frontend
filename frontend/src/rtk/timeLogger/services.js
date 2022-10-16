@@ -13,9 +13,12 @@ const fetchLogs = (date, search) => {
 
 const pushLog = (data) => axios.post(BASE_URL + '/', data)
 
+const fetchWeeklyLogs = () => axios.get(`${BASE_URL}/weekly-summary/`)
+
 const timeLoggerService = {
     fetchLogs,
-    pushLog
+    pushLog,
+    fetchWeeklyLogs
 }
 
 export default timeLoggerService;

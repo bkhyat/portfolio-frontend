@@ -8,6 +8,7 @@ const LogOfTheDay = () => {
     return <Table
         size={'small'}
         loading={isLoading}
+        pagination={false}
         columns={[
             {
                 title: "Started at",

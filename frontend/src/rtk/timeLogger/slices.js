@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import timeLoggerService from "./services";
 import {notification} from "antd";
 
+const DAY_MAP = {0: "Mon", 1: "Tue", 2: "Wed", 3: "Thu", 4: "Fri", 5: "Sat", 6: "Sun"}
 
 export const fetchLogs = createAsyncThunk(
     "timeLogger/fetchLogs",
@@ -21,7 +22,7 @@ export const fetchLogs = createAsyncThunk(
 
 export const enterLog = createAsyncThunk(
     "timeLogger/enterLog",
-    async (data, thinkAPI) => {
+    async (data, thunkAPI) => {
         try {
             const resp = await timeLoggerService.pushLog(data)
             return resp.data
@@ -35,15 +36,31 @@ export const enterLog = createAsyncThunk(
                 message: "Error Pushing log",
                 description: message
             })
-            return thinkAPI.rejectWithValue()
+            return thunkAPI.rejectWithValue()
         }
     }
 )
+
+export const fetchWeeklyLogs = createAsyncThunk(
+    "timeLogger/fetchWeeklyLogs",
+    async (data, thunkAPI) => {
+        try {
+            const resp = await timeLoggerService.fetchWeeklyLogs()
+            return resp.data
+        } catch (e) {
+            notification.error({
+                message: "Error Fetching Weekly Summary",
+                description: e.message
+            })
+            return thunkAPI.rejectWithValue()
+        }
+    })
 
 const initialState = {
     isLoading: false,
     isPushing: false,
     logsOfTheDay: [],
+    weeklyLogs: [],
     logsByDate: {}
 }
 
@@ -67,6 +84,17 @@ const timeLoggerSlice = createSlice(
             },
             [enterLog.rejected]: (state) => {
                 return {...state, isPushing: false}
+            },
+            [fetchWeeklyLogs.fulfilled]: (state, action) => {
+                const weeklyData = action.payload
+                return {
+                    ...state, weeklyLogs: [...Array(7).keys()].map((day_num) => ({
+                        key: day_num,
+                        day: DAY_MAP[day_num],
+                        prevWeek: weeklyData['prev_week'][day_num] || 0,
+                        thisWeek: weeklyData['this_week'][day_num] || 0
+                    }))
+                }
             }
         }
     }

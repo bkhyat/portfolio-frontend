@@ -4,6 +4,8 @@ import {fetchLogs, toggleLoading} from "../../rtk/timeLogger/slices";
 import {Card, Divider, notification, Row,} from "antd";
 import NewTimeLogger from "./newTimeLogger";
 import LogOfTheDay from "./logOfTheDay";
+import WeeklyLogs from "./weeklyLogs";
+import FilterLogs from "./filterLogs";
 
 const TimeLogger = () => {
     const {isLoggedIn} = useSelector(state => state.auth)
@@ -42,6 +44,15 @@ const TimeLogger = () => {
             <Divider>Today's Logs</Divider>
             <LogOfTheDay/>
         </Card>
+        <Card style={{width: '30%'}}>
+            <Divider>Weekly Summary</Divider>
+            <WeeklyLogs/>
+        </Card>
+        <Card style={{width: '70%'}}>
+            <Divider>Filter Logs</Divider>
+            <FilterLogs/>
+        </Card>
+
     </Row>
 }
 

@@ -21,13 +21,13 @@ const TodoModal = ({isVisible, toggleVisible, todo = []}) => {
                     }
                 )
                 .catch(error => {
-                    notification.error("Error updating todo, try again!", 3)
+                    notification.error({message: "Could not update todo", description: error.message})
                 })
                 .finally(() => setPushingData(false))
         } else {
             axios.post(todosURL, values.todos)
                 .then(resp => {
-                    notification.success('New todo created successfully!', 3)
+                    notification.success({message: "Todo Created", description: 'New todo created successfully!'})
                     toggleVisible();
                 })
                 .catch(

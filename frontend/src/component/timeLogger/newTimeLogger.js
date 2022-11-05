@@ -1,9 +1,10 @@
-import {Button, DatePicker, Form, Input, TimePicker} from "antd";
+import {Button, DatePicker, Form, Input, Space, TimePicker, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import {useDispatch} from "react-redux";
 import {enterLog} from "../../rtk/timeLogger/slices";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {DATE_FORMAT, TIME_FORMAT} from "../constants";
+import moment from "moment";
 
 
 const NewTimeLogger = () => {
@@ -25,15 +26,23 @@ const NewTimeLogger = () => {
             size={'small'}
             onFinish={onFinish}
             form={form}>
-            <Form.Item label={"Date"} name={'date'}>
-                <DatePicker format={DATE_FORMAT}/>
+            <Form.Item name={'date'}
+                       // label={"Date"}
+            >
+                <DatePicker format={DATE_FORMAT} defaultValue={moment()}/>
+                {/*<Space>*/}
+                {/*    <DatePicker format={DATE_FORMAT} defaultValue={moment()}/>*/}
+                {/*    <Typography.Link onClick={() => form.setFieldsValue({date: moment()})}>*/}
+                {/*        Today*/}
+                {/*    </Typography.Link>*/}
+                {/*</Space>*/}
             </Form.Item>
-            <Form.Item label={"Times"} name={'times'}
+            <Form.Item name={'times'} //label={"Times"}
                        rules={[{required: true, message: "Times can not be empty"}]}
             >
                 <TimePicker.RangePicker format={TIME_FORMAT}/>
             </Form.Item>
-            <Form.Item label={"Description"} name={'description'}
+            <Form.Item name={'description'} //label={"Description"}
                        rules={[{required: true, message: "Description can not be empty"}]}>
                 <Input.TextArea showCount rows={5}/>
             </Form.Item>

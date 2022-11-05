@@ -115,7 +115,7 @@ const Resume = () => {
 
                 </Row>
             </Card>
-            <div className={'footer-div-for-print'}>https://bkhyat.github.io | {Date().toLocaleString()}</div>
+            {/*<div className={'footer-div-for-print'}>Downloaded from https://bkhyat.github.io | {Date().toLocaleString()}</div>*/}
         </Spin>
     )
 }

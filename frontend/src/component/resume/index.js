@@ -25,7 +25,7 @@ const Resume = () => {
             {`${resume.first_name || 'Er. Bikhyat'} ${resume.last_name || 'Adhikari'}`}
         </Typography.Title>
         <Typography.Text strong>
-            {resume.designation || 'Software Engineer & Team Lead'} <br/>
+            {resume.designation || 'Lead Software Engineer'} <br/>
         </Typography.Text>
         <Typography.Text>
             {resume.titleExtra || 'NEC Reg: 8613 | Python | Django | React | Rest API | Regex | pandas | R'} <br/>
@@ -81,9 +81,10 @@ const Resume = () => {
             <Card
                 // style={{}}
                 className={'resume-wrapper'}
+                bodyStyle={{padding: 3}}
                 bordered={false}>
                 <Row>
-                    <Col md={16}>
+                    <Col sm={16}>
                         <Card.Grid style={{width: '100%', padding: 0, boxShadow: "none"}} hoverable={false}>
                             <Card
                                 size={'small'}
@@ -99,7 +100,7 @@ const Resume = () => {
                         </Card.Grid>
 
                     </Col>
-                    <Col md={8}>
+                    <Col sm={8}>
                         <Card.Grid
                             style={{width: '100%', padding: 0, boxShadow: 'none', background: 'rgb(250, 250, 250)'}}
                             hoverable={false}>

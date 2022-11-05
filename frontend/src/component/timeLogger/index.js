@@ -36,19 +36,19 @@ const TimeLogger = () => {
     }, [isLoggedIn])
 
     return <Row>
-        <Card style={{width: '30%'}}>
+        <Card style={{width: '40%'}}>
             <Divider>Enter New Log</Divider>
             <NewTimeLogger/>
         </Card>
-        <Card style={{width: '70%'}}>
+        <Card style={{width: '60%'}}>
             <Divider>Today's Logs</Divider>
             <LogOfTheDay/>
         </Card>
-        <Card style={{width: '30%'}}>
+        <Card style={{width: '40%'}}>
             <Divider>Weekly Summary</Divider>
             <WeeklyLogs/>
         </Card>
-        <Card style={{width: '70%'}}>
+        <Card style={{width: '60%'}}>
             <Divider>Filter Logs</Divider>
             <FilterLogs/>
         </Card>

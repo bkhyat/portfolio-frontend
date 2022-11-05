@@ -2,7 +2,7 @@ import {Card, Col, Row, Space, Tag, Typography} from "antd";
 
 const montNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-const Experience = ({experience}) => {
+const Experience = ({experience, index, lastIndex}) => {
     const parseDate = date => {
         if (!date) return 'Present'
         const dateObj = new Date(date)
@@ -25,7 +25,7 @@ const Experience = ({experience}) => {
 
         let value = ''
         if (wholeYears) {
-            value += wholeYears + " Year" + (years > 1 ? 's' : '')
+            value += wholeYears + " Year" + (wholeYears > 1 ? 's' : '')
         }
         if (wholeMonths || presentFlag) {
             value += " "
@@ -53,14 +53,14 @@ const Experience = ({experience}) => {
             extra={titleRight}
             style={{width: '100%', background: 'transparent'}}
             size={'small'}
-            headStyle={{fontWeight: 'normal'}}
+            headStyle={{fontWeight: 'normal', }}
             bordered={false}
-            bodyStyle={{borderBottom: '1px solid #f0f0f0'}}
+            bodyStyle={{borderBottom: index===lastIndex?'1px solid #f0f0f0':''}}
         >
             <Row>
                 <Col lg={16}>
                     <Card.Grid style={{width: '100%', padding: '12px 6px 6px 0', boxShadow: 'none'}} hoverable={false}>
-                        <ul style={{textAlign: 'justify'}}>{experience.bullets.map((item, index) => <li
+                        <ul style={{textAlign: 'justify', paddingLeft:20}}>{experience.bullets.map((item, index) => <li
                             key={index}>{item}</li>)}</ul>
                     </Card.Grid>
 
@@ -87,7 +87,7 @@ const ExperienceList = ({experiences}) => {
     return (
         <>
             {experiences.map((experience, index) => (
-                <Experience experience={experience} key={index}/>
+                <Experience experience={experience} key={index} index={index} lastIndex={experience.length-1}/>
             ))}
         </>
     )

@@ -19,7 +19,7 @@ const App = () => {
                 <div className={'logo'}/>
                 <Sidebar/>
             </Sider>
-            <Content style={{margin: '0 16px', background: '#fff'}}>
+            <Content style={{margin: 0, background: '#fff'}}>
                 <Routes>
                     <Route path={'/'} element={<Resume/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>

@@ -82,7 +82,8 @@ const initialState = {
     dates: [],
     search: "",
     logs: [],
-    summary: []
+    summary: [],
+    isLoading: false
   }
 };
 
@@ -96,7 +97,10 @@ const timeLoggerSlice = createSlice(
       toggleWeeklyLoading: (state) => ({
         ...state,
         weeklyLogs: { ...state.weeklyLogs, isLoading: !state.weeklyLogs.isLoading }
-      })
+      }),
+      toggleFilterLoading: (state) => {
+        state.filteredLogs.isLoading = !state.filteredLogs.isLoading
+      }
     },
     extraReducers: {
       [fetchLogs.fulfilled]: (state, action) => {
@@ -130,6 +134,7 @@ const timeLoggerSlice = createSlice(
       [filterLogs.fulfilled]: (state, action) => {
         state.filteredLogs.logs = action.payload.logs;
         state.filteredLogs.summary = action.payload.summary;
+        state.filteredLogs.isLoading = false
         //   action.payload.reduce((groups, item) => ({
         //   ...groups,
         //   [item.date]: ((groups?.[item.date]||{})?.duration_in_minutes||0)+item.duration_in_minutes
@@ -139,5 +144,5 @@ const timeLoggerSlice = createSlice(
   }
 );
 
-export const { toggleLoading, toggleWeeklyLoading } = timeLoggerSlice.actions;
+export const { toggleLoading, toggleWeeklyLoading, toggleFilterLoading } = timeLoggerSlice.actions;
 export default timeLoggerSlice.reducer;

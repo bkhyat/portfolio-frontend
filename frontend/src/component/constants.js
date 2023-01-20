@@ -1,4 +1,5 @@
 import {
+    AppstoreOutlined,
     CalendarOutlined,
     CopyrightCircleOutlined,
     FieldTimeOutlined,
@@ -30,6 +31,11 @@ export const NAV_ITEMS = [
                 label: <Link to={'demo/time-logger'}>Time Logger</Link>,
                 key: '#/demo/time-logger',
                 icon: <FieldTimeOutlined/>
+            },
+            {
+                label: <Link to={'demo/vocab'}>Vocab</Link>,
+                key: '#/demo/time-logger',
+                icon: <AppstoreOutlined />
             },
             {
                 label: 'Simple Quiz',

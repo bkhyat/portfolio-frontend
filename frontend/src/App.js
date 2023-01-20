@@ -8,6 +8,7 @@ import Credits from "./component/credits";
 import Resume from "./component/resume";
 import Login from "./component/auth/login";
 import TimeLogger from "./component/timeLogger";
+import Vocab from "./component/vocab";
 // import Resume from "react-single-page-resume";
 // import data from './dat.json'
 
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path={'/'} element={<Resume/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>
                     <Route path={'/demo/time-logger'} element={<TimeLogger/>}/>
+                    <Route path={'/demo/vocab'} element={<Vocab/>}/>
                     <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
                     <Route path={'/credits'} element={<Credits/>}/>
                     <Route path={'*'} element={<>

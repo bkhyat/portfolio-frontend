@@ -34,7 +34,7 @@ export const NAV_ITEMS = [
             },
             {
                 label: <Link to={'demo/vocab'}>Vocab</Link>,
-                key: '#/demo/time-logger',
+                key: '#/demo/vocab',
                 icon: <AppstoreOutlined />
             },
             {

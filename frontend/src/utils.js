@@ -10,3 +10,14 @@ export const convertMinutesToTime = (minutes) => {
     }
     return `${minutes}M`
 }
+
+export const getContryCodeFromURL = (url) => {
+    return url.split('/').pop().split('.')[0].split('-').pop()
+}
+export const getFlagEmojiByContryCode = (contryCode) => {
+  const codePoints = contryCode
+    .toUpperCase()
+    .split('')
+    .map(char =>  127397 + char.charCodeAt());
+  return String.fromCodePoint(...codePoints);
+}

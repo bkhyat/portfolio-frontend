@@ -3,6 +3,7 @@ import resumeReducer from './resume/slices'
 import stackoverflowReducer from "./stackoverflow/slices";
 import authReducer from './auth/slices';
 import timeLoggerReducer from './timeLogger/slices';
+import vocabReducer from './vocab/slices'
 
 
 const store = configureStore(
@@ -11,7 +12,8 @@ const store = configureStore(
             resume: resumeReducer,
             stackoverflow: stackoverflowReducer,
             auth: authReducer,
-            timeLogger: timeLoggerReducer
+            timeLogger: timeLoggerReducer,
+            vocab: vocabReducer
         }
     }
 )

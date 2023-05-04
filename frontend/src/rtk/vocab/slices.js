@@ -7,11 +7,11 @@ export const fetchWordsOfTheDay = createAsyncThunk(
         try{
             const resp = await vocabServices.getWordsOfTheDay()
             for(let i=0; i<resp.data.length; i++){
-                // const meaning = await vocabServices.fetchMeaning(resp.data[i])
-                const meaning = await vocabServices.fetchMeaning("crook")
+                const meaning = await vocabServices.fetchMeaning(resp.data[i])
+                // const meaning = await vocabServices.fetchMeaning("crook")
                 console.log(meaning.data)
                 if (meaning.data?.title !== "No Definitions Found"){
-                    return meaning.data[0];
+                    return meaning.data;
                 }
             }
         } catch (e) {
@@ -23,7 +23,7 @@ export const fetchWordsOfTheDay = createAsyncThunk(
 const initialState = {
     cards: [
     ],
-    wordOfTheDay: {}
+    wordOfTheDay: []
 }
 
 const VocabSlice = createSlice({

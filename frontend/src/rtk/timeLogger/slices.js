@@ -61,10 +61,10 @@ export const fetchWeeklyLogs = createAsyncThunk(
       const resp = await timeLoggerService.fetchWeeklyLogs();
       return resp.data;
     } catch (e) {
-      notification.error({
-        message: "Error Fetching Weekly Summary",
-        description: e.message
-      });
+      // notification.error({
+      //   message: "Error Fetching Weekly Summary",
+      //   description: e.message
+      // });
       return thunkAPI.rejectWithValue();
     }
   });

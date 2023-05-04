@@ -14,7 +14,7 @@ const WordsOfTheDay = () => {
 
     return <>
         <h3 style={{textAlign: "center"}}>Word Of The Day</h3>
-        <WordMeaning wordMeaning={wordOfTheDay}/>
+        {wordOfTheDay.map(wordMeaning => <WordMeaning wordMeaning={wordMeaning}/>)}
     </>
 }
 

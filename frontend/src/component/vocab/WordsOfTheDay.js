@@ -1,8 +1,7 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchWordsOfTheDay} from "../../rtk/vocab/slices";
-import {SoundOutlined} from "@ant-design/icons";
-import WordMeaning from "./WordMeaning";
+import {fetchWordsOfTheDay} from "../../rtk/vocab_/slices";
+import WordMeaning from "./wordMeaning/WordMeaning";
 
 const WordsOfTheDay = () => {
     const dispatch = useDispatch();

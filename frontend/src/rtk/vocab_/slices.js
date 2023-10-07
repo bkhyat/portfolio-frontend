@@ -34,13 +34,13 @@ export const fetchPageCount = createAsyncThunk(
 )
 
 export const fetchWordsInPages = createAsyncThunk(
-    "vocabs/fetch-words-in-set",
+    "vocabs/fetch-page-counts",
     async (data, thunkAPI) => {
         try{
-            const resp = await vocabServices.fetchWordsInPage(data)
+            const resp = await vocabServices.fetchWordsInPage({page: data?.page})
             return {
-                set: data,
-                data: resp.data
+                page: data?.page,
+                words: resp.data.results
             }
         } catch (e) {
             console.log(e)
@@ -50,15 +50,15 @@ export const fetchWordsInPages = createAsyncThunk(
 )
 
 export const fetchWordMeaning = createAsyncThunk(
-    "vocab/fetch-word-meaning",
-    async (data, thunkAPI) => {
-        if(Object.keys(thunkAPI.getState().vocab.meanings).includes(data)){
+    "vocab_/fetch-word-meaning",
+    async ({word}, thunkAPI) => {
+        if(Object.keys(thunkAPI.getState().vocab.meanings).includes(word)){
             thunkAPI.rejectWithValue("Meaning already fetched")
         }
         try{
-            const resp = await vocabServices.fetchMeaning(data)
+            const resp = await vocabServices.fetchMeaning()
             return {
-                word: data,
+                word,
                 meanings: resp.data
             }
         } catch (e) {
@@ -68,23 +68,11 @@ export const fetchWordMeaning = createAsyncThunk(
     }
 )
 
-export const fetchSets = createAsyncThunk(
-    "vocab/fetch-sets",
-    async (data, thunkAPI) => {
-        try{
-            const resp = await vocabServices.fetchSets()
-            return resp.data
-        }catch (e) {
-            thunkAPI.rejectWithValue("Could not fetch sets")
-        }
-    }
-)
 const initialState = {
     practiceSet: {
-        allSets: [],
         pageCount: 0,
         fetchingPageCount: true,
-        selectedSet: [],
+        currentPage: 0,
         currentIndex: -1
     },
     cards: [
@@ -102,8 +90,8 @@ const VocabSlice = createSlice({
         setPageCount: (state, {pageCount}) => {
             state.practiceSet.pageCount=pageCount
         },
-        setSelectedSet: (state, action) => {
-         state.practiceSet.selectedSet = action.payload
+        setCurrentPage: (state, action) => {
+         state.practiceSet.currentPage = action.payload
         },
         toggleFetchingPageCount: (state) => {
             state.practiceSet.fetchingPageCount = !state.practiceSet.fetchingPageCount
@@ -117,7 +105,10 @@ const VocabSlice = createSlice({
             return {...state, wordOfTheDay: action.payload}
         },
         [fetchWordsInPages.fulfilled]: (state, action) => {
-            state.practiceSet[action.payload.set] = action.payload.data.map(({word}) => word)
+            state.practiceSet[action.page] = action.words.map(({word}) => word)
+            if(!action.page){
+                state.practiceSet.fetchingPageCount = false
+            }
         },
         [fetchPageCount.fulfilled]: (state, action) => {
           state.practiceSet.pageCount = action.payload.pageCount
@@ -127,25 +118,19 @@ const VocabSlice = createSlice({
         },
         [fetchWordMeaning.fulfilled]: (state, action) => {
             state.meanings.isLoading = false
-            state.meanings[action.payload.word] = action.payload.meanings
+            state.meanings[action.word] = action.meanings
         },
         [fetchWordMeaning.rejected]: (state, action) => {
             state.meanings.isLoading = false
         },
         [fetchWordMeaning.pending]: (state, action) => {
             state.meanings.isLoading = true
-        },
-        [fetchSets.fulfilled]: (state, action) => {
-            state.practiceSet.allSets = [...action.payload]
-        },
-        [fetchSets.rejected]: (state, action) => {
-
         }
     }
 })
 
 export const {setCurrentPage,
-    setSelectedSet,
+    setPageCount,
     toggleFetchingPageCount,
 setCurrentIndex} = VocabSlice.actions
 export default VocabSlice.reducer;

@@ -41,12 +41,12 @@ const TimeLogger = () => {
             <NewTimeLogger/>
         </Card>
         <Card style={{width: '60%'}}>
-            <Divider>Today's Logs</Divider>
-            <LogOfTheDay/>
-        </Card>
-        <Card style={{width: '40%'}}>
             <Divider>Weekly Summary</Divider>
             <WeeklyLogs/>
+        </Card>
+        <Card style={{width: '40%'}}>
+            <Divider>Today's Logs</Divider>
+            <LogOfTheDay/>
         </Card>
         <Card style={{width: '60%'}}>
             <Divider>Filter Logs</Divider>

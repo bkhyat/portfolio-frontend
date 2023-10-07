@@ -15,9 +15,8 @@ const NewTimeLogger = () => {
 
         data['start'] = times[0].format(TIME_FORMAT)
         data['end'] = times[1].format(TIME_FORMAT)
-        data['date'] = date.format(DATE_FORMAT)
+        data['date'] = (date||moment()).format(DATE_FORMAT)
         dispatch(enterLog(data))
-        // form.resetFields()
     }
 
     return (

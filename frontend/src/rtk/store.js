@@ -3,6 +3,7 @@ import resumeReducer from './resume/slices'
 import stackoverflowReducer from "./stackoverflow/slices";
 import authReducer from './auth/slices';
 import timeLoggerReducer from './timeLogger/slices';
+import vocabReducer_ from './vocab_/slices'
 import vocabReducer from './vocab/slices'
 
 

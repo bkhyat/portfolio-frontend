@@ -7,21 +7,20 @@ const getWordsOfTheDay = () => {
 }
 
 const fetchWordsInPage = (data) => {
-    return axios.get(`${BASE_URL}/practice/${data}/words/`)
+    return axios.get(BASE_URL + '/words/', {
+        params: data?.page ? {page: data.page} : {only_page_count: true}
+    })
 }
 
 const fetchMeaning = (word) => {
     return axios.get('https://api.dictionaryapi.dev/api/v2/entries/en/' + word)
 }
 
-const fetchSets = () => {
-    return axios.get(BASE_URL +'/practice/')
-}
+
 const vocabServices = {
     getWordsOfTheDay,
     fetchWordsInPage,
-    fetchMeaning,
-    fetchSets
+    fetchMeaning
 };
 
 export default vocabServices;

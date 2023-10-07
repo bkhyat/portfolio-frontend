@@ -20,12 +20,12 @@ const App = () => {
                 <div className={'logo'}/>
                 <Sidebar/>
             </Sider>
-            <Content style={{margin: 0, background: '#fff'}}>
+            <Content style={{margin: 0, background: '#fff', marginLeft: "10px"}}>
                 <Routes>
                     <Route path={'/'} element={<Resume/>}/>
                     <Route path={'/demo/todo'} element={<Todo/>}/>
                     <Route path={'/demo/time-logger'} element={<TimeLogger/>}/>
-                    <Route path={'/demo/vocab'} element={<Vocab/>}/>
+                    <Route path={'/demo/vocab_'} element={<Vocab/>}/>
                     <Route path={'/stackoverflow'} element={<Stackoverflow/>}/>
                     <Route path={'/credits'} element={<Credits/>}/>
                     <Route path={'*'} element={<>

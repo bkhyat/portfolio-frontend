@@ -33,9 +33,10 @@ export const NAV_ITEMS = [
                 icon: <FieldTimeOutlined/>
             },
             {
-                label: <Link to={'demo/vocab'}>Vocab</Link>,
-                key: '#/demo/vocab',
-                icon: <AppstoreOutlined />
+                label: <Link to={'demo/vocab_'}>Vocab</Link>,
+                key: '#/demo/vocab_',
+                icon: <AppstoreOutlined />,
+                disabled: true,
             },
             {
                 label: 'Simple Quiz',

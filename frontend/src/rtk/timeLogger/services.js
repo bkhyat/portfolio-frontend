@@ -15,7 +15,7 @@ const fetchLogs = (queryParams) => {
 
 const pushLog = (data) => axios.post(BASE_URL + '/', data)
 
-const fetchWeeklyLogs = () => axios.get(`${BASE_URL}/weekly-summary/`)
+const fetchWeeklyLogs = () => axios.get(`${BASE_URL}/weekly-summary/?date=${(new Date()).toJSON()}`)
 
 const timeLoggerService = {
     fetchLogs,

@@ -2,7 +2,7 @@ import {Button, DatePicker, Form, Input, Space, TimePicker, Typography} from "an
 import {useForm} from "antd/es/form/Form";
 import {useDispatch} from "react-redux";
 import {enterLog} from "../../rtk/timeLogger/slices";
-import {ArrowRightOutlined} from "@ant-design/icons";
+import {ArrowDownOutlined} from "@ant-design/icons";
 import {DATE_FORMAT, TIME_FORMAT} from "../constants";
 import moment from "moment";
 
@@ -46,7 +46,7 @@ const NewTimeLogger = () => {
                 <Input.TextArea showCount rows={5}/>
             </Form.Item>
             <Form.Item wrapperCol={{offset: 11}}>
-                <Button htmlType={'submit'} type={'primary'} icon={<ArrowRightOutlined/>}>Enter</Button>
+                <Button htmlType={'submit'} type={'primary'} icon={<ArrowDownOutlined />}>Enter</Button>
             </Form.Item>
 
         </Form>)
